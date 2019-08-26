@@ -4,7 +4,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node -r esm server.js",
-    "daemon": "nodemon server.js"
+    "daemon": "nodemon -r esm server.js"
   },
   "author": "cnlinqh",
   "dependencies": {
