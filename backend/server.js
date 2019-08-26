@@ -1,11 +1,15 @@
-const mongoose = require('mongoose');
-const express = require('express');
-var cors = require('cors');
-const bodyParser = require('body-parser');
-const logger = require('morgan');
-const Data = require('./data');
-
-const API_PORT = 3001;
+import mongoose from 'mongoose';
+import express from "express";
+import cors from 'cors';
+import bodyParser from 'body-parser';
+import logger from 'morgan';
+import Data from './data';
+//const mongoose = require('mongoose');
+// const express = require('express');
+// var cors = require('cors');
+// const bodyParser = require('body-parser');
+// const logger = require('morgan');
+// const Data = require('./data');
 const app = express();
 
 app.use(cors());
@@ -73,4 +77,4 @@ router.post('/updateData', (req, res) => {
 });
 
 app.use('/api', router);
-app.listen(API_PORT, () => console.log(`Listening on port ${API_PORT}`));
+app.listen(3001, () => console.log(`Listening on port ${API_PORT}`));
