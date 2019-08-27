@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import Header from './Header';
+import Row from './Row'
 import axios from "axios";
 
 class App extends Component {
@@ -6,7 +8,6 @@ class App extends Component {
     data: [],
     id: 0,
     message: null,
-    intervalIsSet: false,
     idToDelete: null,
     idToUpdate: null,
     objectToUpdate: null
@@ -79,20 +80,31 @@ class App extends Component {
   };
 
   render() {
-    const { data } = this.state;
     return (
       <div>
         <ul>
-          {data.length <= 0
+          {this.state.data.length <= 0
             ? "NO DB ENTRIES YET"
-            : data.map(dat => (
-                <li style={{ padding: "10px" }} key={data.message}>
-                  <span style={{ color: "gray" }}> id: </span> {dat.id}
-                  <br />
-                  <span style={{ color: "gray" }}> data: </span>
-                  {dat.message}
-                </li>
-              ))}
+            : this.state.data.map(dat => (
+              <li style={{ padding: "10px" }} key={this.state.data.message}>
+                <span style={{ color: "gray" }}> id: </span> {dat.id}
+                <br />
+                <span style={{ color: "gray" }}> data: </span>
+                {dat.message}
+              </li>
+            ))}
+        </ul>
+        <ul>
+          <table border="1">
+            <Header></Header>
+            {this.state.data.map(item => (
+              <Row id={item.id} message={item.message}
+                deleteFromDB={this.deleteFromDB}
+                updateDataToDB={this.updateDataToDB}
+                getDataFromDB={this.getDataFromDB}>
+              </Row>
+            ))}
+          </table>
         </ul>
         <div style={{ padding: "10px" }}>
           <input
