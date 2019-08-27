@@ -17,6 +17,27 @@ class App extends Component {
     this.getDataFromDB();
   }
 
+  findItemById = (id) => {
+    var re = {};
+    for (let item of this.state.data) {
+      if (item.id === id) {
+        re = item;
+        break;
+      }
+    }
+    return re;
+  }
+
+  removeItemById = (id) => {
+    for (var i = 0; i < this.state.data.length; i++) {
+      if (this.state.data[i].id === id) {
+        this.state.data.splice(i, 1);
+        this.setState({ data: this.state.data });
+        break;
+      }
+    }
+  }
+
   getDataFromDB = () => {
     fetch("http://localhost:3001/api/getData")
       .then(res => res.json())
@@ -28,20 +49,10 @@ class App extends Component {
   };
 
   updateDataToDB = (idToUpdate, updateToApply) => {
-    let objIdToUpdate = null;
-    this.state.data.forEach(dat => {
-      if (dat.id == idToUpdate) {
-        objIdToUpdate = dat._id;
-      }
-    });
-
     axios
       .post("http://localhost:3001/api/updateData", {
-        id: objIdToUpdate,
+        id: this.findItemById(idToUpdate)._id,
         update: { message: updateToApply }
-      })
-      .then(() => {
-        this.getDataFromDB();
       });
   };
 
@@ -56,105 +67,45 @@ class App extends Component {
         id: idToBeAdded,
         message: message
       })
-      .then(() => {
-        this.getDataFromDB();
-      });
+      .then(() => this.getDataFromDB());
   };
 
   deleteFromDB = idToDelete => {
-    let objIdToDelete = null;
-    this.state.data.forEach(item => {
-      if (item.id == idToDelete) {
-        objIdToDelete = item._id;
-      }
-    });
     axios
       .delete("http://localhost:3001/api/deleteData", {
         data: {
-          id: objIdToDelete
+          id: this.findItemById(idToDelete)._id
         }
       })
-      .then(() => {
-        this.getDataFromDB();
-      });
+      .then(() => this.removeItemById(idToDelete));
   };
 
   render() {
     return (
       <div>
-        <ul>
-          {this.state.data.length <= 0
-            ? "NO DB ENTRIES YET"
-            : this.state.data.map(dat => (
-              <li style={{ padding: "10px" }} key={this.state.data.message}>
-                <span style={{ color: "gray" }}> id: </span> {dat.id}
-                <br />
-                <span style={{ color: "gray" }}> data: </span>
-                {dat.message}
-              </li>
-            ))}
-        </ul>
-        <ul>
-          <table border="1">
-            <Header></Header>
-            {this.state.data.map(item => (
-              <Row id={item.id} message={item.message}
-                deleteFromDB={this.deleteFromDB}
-                updateDataToDB={this.updateDataToDB}
-                getDataFromDB={this.getDataFromDB}>
-              </Row>
-            ))}
-          </table>
-        </ul>
-        <div style={{ padding: "10px" }}>
+        <div>
           <input
             type="text"
             onChange={e => this.setState({ message: e.target.value })}
-            placeholder="add something in the database"
-            style={{ width: "200px" }}
+            placeholder="Message"
+            style={{ width: "180px" }}
           />
-          <button onClick={() => this.putDataToDB(this.state.message)}>
-            ADD
-          </button>
-        </div>
-
-        <div style={{ padding: "10px" }}>
-          <input
-            type="text"
-            style={{ width: "200px" }}
-            onChange={e => this.setState({ idToDelete: e.target.value })}
-            placeholder="put id of item to delete here"
-          />
-          <button onClick={() => this.deleteFromDB(this.state.idToDelete)}>
-            DELETE
-          </button>
-        </div>
-        <div style={{ padding: "10px" }}>
-          <input
-            type="text"
-            style={{ width: "200px" }}
-            onChange={e => this.setState({ idToUpdate: e.target.value })}
-            placeholder="id of item to update here"
-          />
-          <input
-            type="text"
-            style={{ width: "200px" }}
-            onChange={e => this.setState({ updateToApply: e.target.value })}
-            placeholder="put new value of the item here"
-          />
-          <button
-            onClick={() =>
-              this.updateDataToDB(
-                this.state.idToUpdate,
-                this.state.updateToApply
-              )
-            }
-          >
-            UPDATE
-          </button>
+          <button onClick={() => this.putDataToDB(this.state.message)}>Add</button>
+          <button onClick={() => this.getDataFromDB()}>Refresh</button>
         </div>
         <div>
-          <button onClick={() => this.getDataFromDB()}>Refresh</button>
+          <table border="1">
+            <tbody>
+              <Header></Header>
+              {this.state.data.map(item => (
+                <Row key={item.id} id={item.id} message={item.message}
+                  deleteFromDB={this.deleteFromDB}
+                  updateDataToDB={this.updateDataToDB}
+                  getDataFromDB={this.getDataFromDB}>
+                </Row>
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
     );

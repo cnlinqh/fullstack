@@ -1,48 +1,35 @@
 import React, { Component } from 'react';
+import EditableCell from './EditableCell'
 class Row extends Component {
 
     constructor(props) {
         super(props);
-        console.log(props);
+        this.handleMessageChang = this.handleMessageChang.bind(this);
         this.state = {
-            message: props.message
-        };
-        this.msgRef = React.createRef();
+            msg: this.props.message
+        }
     }
-
 
     deleteRow() {
         this.props.deleteFromDB(this.props.id);
-        this.props.getDataFromDB();
+        // this.props.getDataFromDB();
     };
 
     updateRow() {
-        this.props.updateDataToDB(this.props.id, this.state.message);
-        this.props.getDataFromDB();
+        this.props.updateDataToDB(this.props.id, this.state.msg);
+        // this.props.getDataFromDB();
     };
 
-    onMessageChange(event) {
-        var msg = event.currentTarget.textContent;
-        this.setState({message:msg});
+    handleMessageChang(msg) {
+        // var msg = event.currentTarget.textContent;
+        this.setState({ msg: msg });
     };
 
     render() {
         return (
             <tr>
                 <td>{this.props.id}</td>
-                {/* <td contenteditable="true" onKeyUp={this.onMessageChange.bind(this)}>
-                    {this.props.message}
-                </td>
-                <td contenteditable="true">
-                    <input contenteditable="true" type="text" value={this.props.message}></input>
-                </td> */}
-                <td>
-                    <div contentEditable="true" >
-                        <input contentEditable="true" ref={this.msgRef} >
-                        
-                        </input>
-                    </div>
-                </td>
+                <td><EditableCell message={this.state.msg} handleMessageChang={this.handleMessageChang}></EditableCell></td>
                 <td >
                     {/* ES6 => function*/}
                     <button onClick={() => this.deleteRow()}>Delete</button>
@@ -53,5 +40,4 @@ class Row extends Component {
         );
     }
 }
-
 export default Row;
