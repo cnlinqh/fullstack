@@ -28,9 +28,9 @@ class Row extends Component {
     render() {
         return (
             <tr>
-                <td>{this.props.id}</td>
+                <td className="idColumn">{this.props.id}</td>
                 <td><EditableCell message={this.state.msg} handleMessageChang={this.handleMessageChang}></EditableCell></td>
-                <td >
+                <td className="actionsColumn">
                     {/* ES6 => function*/}
                     <button onClick={() => this.deleteRow()}>Delete</button>
                     {/* ES5 bind method is needed*/}

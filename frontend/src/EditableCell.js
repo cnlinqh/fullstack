@@ -24,8 +24,8 @@ class EditableCell extends Component {
     
     render() {
         return this.state.editing?
-        <input ref='input'  onBlur={()=>this.onBlur()} onChange={()=>this.onChange()}></input>:
-        <div onClick={()=>this.onFocus()}>{this.props.message}</div>
+        <input className="editingCell" ref='input'  onBlur={()=>this.onBlur()} onChange={()=>this.onChange()}></input>:
+        <div  onClick={()=>this.onFocus()}>{this.props.message}</div>
     }
 }
 export default EditableCell;
