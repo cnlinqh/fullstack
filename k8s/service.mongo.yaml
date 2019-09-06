@@ -18,7 +18,8 @@ spec:
     - protocol: TCP
       port: 27017
       targetPort: 27017
-  type: ClusterIP
+      nodePort: 31002
+  type: NodePort
 ---
 apiVersion: apps/v1
 kind: Deployment
