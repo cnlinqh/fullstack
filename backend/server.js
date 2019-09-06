@@ -22,19 +22,83 @@ app.use(cors());
 
 const router = express.Router();
 
+
+/*var db = mongoose.connection;
+db.on('connecting', () => console.log('connecting to MongoDB...'));
+db.on('error', () => {
+    console.error('Error in MongoDb connection: ' + error);
+    mongoose.disconnect();
+});
+db.on('connected', () => console.log('MongoDB connected!'));
+db.once('open', () => console.log('MongoDB connection opened!'));
+db.on('reconnected', () => console.log('MongoDB reconnected!'));
+db.on('disconnected', () => {
+    console.log('MongoDB disconnected!');
+    mongoose.connect(MONGO_URL,
+        {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+            server: {
+                auto_reconnect: true
+            }
+        })
+       //.then((result) => console.log("connection succeed"))
+        //.catch((result) => console.log("connection failed : " + result));
+});
+
 mongoose.connect(MONGO_URL,
     {
         useNewUrlParser: true,
-        useUnifiedTopology: true
-    })
-    .then((result) => console.log("connection succeed"))
-    .catch((result) => console.log("connection failed : " + result));
+        useUnifiedTopology: true,
+        auto_reconnect: true,
+        // server: {
+        //     auto_reconnect: true
+        // }
+    })//
+    //.then((result) => console.log("connection succeed"))
+    //.catch((result) => console.log("connection failed : " + result));
+*/
 
-let db = mongoose.connection;
+mongoose.Promise = Promise; // Set mongoose to use ES6 Promises.
 
-db.once('open', () => console.log('open to database'));
+const reconnectTimeout = 5000; // ms.
 
-db.on('error', () => console.log("connection error"));
+function connect() {
+    mongoose.connect(MONGO_URL, { auto_reconnect: true, useNewUrlParser: true, useUnifiedTopology: true })
+        .catch(() => { });
+    // Catch the warning, no further treatment is required
+    // because the Connection events are already doingß.
+}
+
+const db = mongoose.connection;
+
+db.on('connecting', () => {
+    console.info('Connecting to MongoDB...');
+});
+
+db.on('error', (error) => {
+    console.error(`MongoDB connection error: ${error}`);
+    mongoose.disconnect();
+});
+
+db.on('connected', () => {
+    console.info('Connected to MongoDB!');
+});
+
+db.once('open', () => {
+    console.info('MongoDB connection opened!');
+});
+
+db.on('reconnected', () => {
+    console.info('MongoDB reconnected!');
+});
+
+db.on('disconnected', () => {
+    console.error(`MongoDB disconnected! Reconnecting in ${reconnectTimeout / 1000}s...`);
+    setTimeout(() => connect(), reconnectTimeout);
+});
+
+connect();
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -72,7 +136,6 @@ router.delete('/deleteData', (req, res) => {
         return res.json({ success: true });
     });
 });
-
 
 router.post('/updateData', (req, res) => {
     const { id, update } = req.body;
