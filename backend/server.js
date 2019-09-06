@@ -3,20 +3,26 @@ import express from "express";
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import logger from 'morgan';
+import dotenv from 'dotenv'
 import Data from './data';
+
 // const mongoose = require('mongoose');
 // const express = require('express');
 // var cors = require('cors');
 // const bodyParser = require('body-parser');
 // const logger = require('morgan');
+// const dotenv = require('dotenv');
 // const Data = require('./data');
+dotenv.config();
+var MONGO_URL = `${process.env.MONGO_URL}`;
+console.log(MONGO_URL);
 const app = express();
 
 app.use(cors());
 
 const router = express.Router();
 
-mongoose.connect('mongodb://root:Sybase123@10.59.161.81:27017/app?authSource=admin',
+mongoose.connect(MONGO_URL,
     {
         useNewUrlParser: true,
         useUnifiedTopology: true

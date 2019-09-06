@@ -4,6 +4,8 @@ import Row from './Row'
 import axios from "axios";
 import './style.css'
 
+var BACKEND_URL = "http://192.168.99.90:31001";
+
 class App extends Component {
   state = {
     data: [],
@@ -40,7 +42,7 @@ class App extends Component {
   }
 
   getDataFromDB = () => {
-    fetch("http://localhost:3001/api/getData")
+    fetch(BACKEND_URL + "/api/getData")
       .then(res => res.json())
       .then(data => {
         this.setState({ data: data.messages });
@@ -52,7 +54,7 @@ class App extends Component {
   updateDataToDB = (idToUpdate, updateToApply) => {
     console.log(idToUpdate + " : " + updateToApply)
     axios
-      .post("http://localhost:3001/api/updateData", {
+      .post(BACKEND_URL + "/api/updateData", {
         id: this.findItemById(idToUpdate)._id,
         update: { message: updateToApply }
       });
@@ -66,7 +68,7 @@ class App extends Component {
       ++idToBeAdded;
     }
     axios
-      .post("http://localhost:3001/api/putData", {
+      .post(BACKEND_URL + "/api/putData", {
         id: idToBeAdded,
         message: message
       })
@@ -76,7 +78,7 @@ class App extends Component {
   deleteFromDB = idToDelete => {
     console.log(idToDelete);
     axios
-      .delete("http://localhost:3001/api/deleteData", {
+      .delete(BACKEND_URL + "/api/deleteData", {
         data: {
           id: this.findItemById(idToDelete)._id
         }

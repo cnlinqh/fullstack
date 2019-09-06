@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: linqh-mongo
+  labels:
+    app: linqh-mongo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: linqh-mongo
+  template:
+    metadata:
+      labels:
+        app: linqh-mongo
+    spec:
+      containers:
+        - name: linqh-mongo
+          image: mongo:4.2
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 27017
+          env:
+            - name: MONGO_INITDB_ROOT_USERNAME
+              value: root
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              value: Sybase123
+            - name: MONGO_INITDB_DATABASE
+              value: admin
