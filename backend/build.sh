@@ -1,3 +1,3 @@
 bbuild(){
-     docker build -t cnlinqh/nodejs.backend .
+     docker build -t cnlinqh/fullstack.backend .
 }
