@@ -91,6 +91,9 @@ class App extends Component {
     return (
       <div>
         <div>
+            <h2>Backend URL: {BACKEND_URL}</h2>
+        </div>
+        <div>
           <input
             type="text"
             onChange={e => this.setState({ message: e.target.value })}
