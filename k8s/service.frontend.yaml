@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: linqh-frontend
+spec:
+  selector:
+    app: linqh-frontend
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+      nodePort: 31000
+  type: NodePort
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: linqh-frontend
+  labels:
+    app: linqh-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: linqh-frontend
+  template:
+    metadata:
+      labels:
+        app: linqh-frontend
+    spec:
+      containers:
+        - name: linqh-frontend
+          image: cnlinqh/fullstack.frontend
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
+          env:
+            - name: REACT_APP_BACKEND_URL
+              value: http://linqh-backend:31001

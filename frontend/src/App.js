@@ -3,9 +3,10 @@ import Header from './Header';
 import Row from './Row'
 import axios from "axios";
 import './style.css'
-
-var BACKEND_URL = "http://192.168.99.90:31001";
-
+import dotenv from 'dotenv'
+dotenv.config();
+var BACKEND_URL = `${process.env.REACT_APP_BACKEND_URL}`;
+console.log(BACKEND_URL);
 class App extends Component {
   state = {
     data: [],
