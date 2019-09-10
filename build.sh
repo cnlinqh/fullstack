@@ -1,3 +1,4 @@
+#!/bin/bash
 frontend(){
     cd frontend
     npm install;
