@@ -1,9 +1,9 @@
-const passport = require('passport');
-const Strategy = require('passport-http-bearer').Strategy;
+import passport from 'passport';
+import bearer from 'passport-http-bearer';
+import User from './models/user';
+const Strategy = bearer.Strategy;
 
-const User = require('./models/user');
-
-module.exports = function (passport) {
+export default function (passport) {
     passport.use(new Strategy(
         function (token, done) {
             User.findOne({

@@ -1,15 +1,19 @@
 import express from 'express';
 import Data from '../models/data';
+import passport from 'passport';
+import mypass from '../passport';
+
+mypass(passport);
 
 const router = express.Router();
-router.get('/getData', (req, res) => {
+router.get('/getData', passport.authenticate('bearer', { session: false }), (req, res) => {
     Data.find((err, data) => {
         if (err) return res.json({ success: false, error: err });
         return res.json({ success: true, messages: data });
     })
 });
 
-router.post('/putData', (req, res) => {
+router.post('/putData', passport.authenticate('bearer', { session: false }), (req, res) => {
     const { id, message } = req.body;
     if ((!id && id !== 0) || !message) {
         return res.json({
@@ -26,7 +30,7 @@ router.post('/putData', (req, res) => {
     })
 });
 
-router.delete('/deleteData', (req, res) => {
+router.delete('/deleteData', passport.authenticate('bearer', { session: false }), (req, res) => {
     const { id } = req.body;
     Data.findByIdAndRemove(id, (err) => {
         if (err) return res.json({ success: false, error: err });
@@ -34,7 +38,7 @@ router.delete('/deleteData', (req, res) => {
     });
 });
 
-router.post('/updateData', (req, res) => {
+router.post('/updateData', passport.authenticate('bearer', { session: false }), (req, res) => {
     const { id, update } = req.body;
     Data.findByIdAndUpdate(id, update, (err) => {
         if (err) return res.json({ success: false, error: err });
