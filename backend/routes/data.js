@@ -1,7 +1,7 @@
 import express from 'express';
 import Data from '../models/data';
 import passport from 'passport';
-import mypass from '../passport';
+import mypass from '../utils/passport';
 
 mypass(passport);
 

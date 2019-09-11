@@ -1,6 +1,6 @@
 import passport from 'passport';
 import bearer from 'passport-http-bearer';
-import User from './models/user';
+import User from '../models/user';
 const Strategy = bearer.Strategy;
 
 export default function (passport) {

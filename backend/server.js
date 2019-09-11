@@ -3,7 +3,7 @@ import express from "express";
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import logger from 'morgan';
-import db from './mongo';
+import db from './utils/mongo';
 import datarouter from './routes/data';
 import userrouter from './routes/user';
 

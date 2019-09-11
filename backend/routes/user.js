@@ -2,7 +2,7 @@ import express from 'express';
 import User from '../models/user';
 import jwt from 'jsonwebtoken';
 import passport from 'passport';
-import mypass from '../passport';
+import mypass from '../utils/passport';
 
 mypass(passport);
 var secret = "thisisasecretstring";
