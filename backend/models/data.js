@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 const DataSchema = new Schema(
   {
@@ -12,4 +12,4 @@ const DataSchema = new Schema(
 
 DataSchema.set("collection", "fullstack");
 
-module.exports = mongoose.model("Data", DataSchema);
+export default mongoose.model("Data", DataSchema);

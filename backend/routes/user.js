@@ -1,13 +1,13 @@
-const express = require('express');
-const User = require('../models/user');
-const jwt = require('jsonwebtoken');
-const passport = require('passport');
-const router = express.Router();
+import express from 'express';
+import User from '../models/user';
+import jwt from 'jsonwebtoken';
+import passport from 'passport';
+import mypass from '../passport';
 
-require('../passport')(passport);
-
+mypass(passport);
 var secret = "thisisasecretstring";
 
+const router = express.Router();
 router.post('/signup', (req, res) => {
     if (!req.body.name || !req.body.password) {
         res.json({ success: false, message: 'Input name && password.' });
@@ -69,4 +69,4 @@ router.get('/user_info',
         res.json({ username: req.user.name });
     });
 
-module.exports = router;
+export default router;
