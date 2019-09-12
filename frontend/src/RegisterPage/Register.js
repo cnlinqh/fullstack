@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { registrationActions } from '../_actions'
+import { userActions } from '../_actions'
 class Register extends Component {
     constructor(props) {
         super(props);
@@ -19,8 +19,8 @@ class Register extends Component {
         var user = this.state.user;
         this.setState({
             user: {
-                ...user, 
-                [name]:value
+                ...user,
+                [name]: value
             }
         });
     }
@@ -61,11 +61,11 @@ class Register extends Component {
     }
 }
 function mapStateToProps(state) {
-    const { status } = state.registration;
+    const { status } = state.user;
     return { status }
 }
 const mapDispatchToProps = {
-    register: registrationActions.register
+    register: userActions.register
 }
 const connectedRegister = connect(mapStateToProps, mapDispatchToProps)(Register)
 export { connectedRegister as Register };

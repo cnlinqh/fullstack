@@ -1,6 +1,6 @@
 import CONSTANTS from '../_helpers/constants';
 var defaultState = { status: "New" };
-export function registration(state = defaultState, action) {
+export function user(state = defaultState, action) {
     switch (action.type) {
         case CONSTANTS.REGISTER_REQUEST:
             return Object.assign({}, state, { status: "Registering" });

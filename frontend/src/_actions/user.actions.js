@@ -29,6 +29,6 @@ function register(name, password) {
     };
 }
 
-export const registrationActions = {
+export const userActions = {
     register
 };
