@@ -5,39 +5,52 @@ import { registrationActions } from '../_actions'
 class Register extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            user: {
+                name: "",
+                password: ""
+            }
+        }
+        this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
-
+    handleChange(event) {
+        var { name, value } = event.target;
+        var user = this.state.user;
+        this.setState({
+            user: {
+                ...user, 
+                [name]:value
+            }
+        });
+    }
     handleSubmit(event) {
-        //event.preventDefault();
-        this.props.register('cn', 'Sybase123');
+        event.preventDefault();
+        this.props.register(this.state.user.name, this.state.user.password);
     }
     render() {
-        const { status  } = this.props;
         return (
             <div>
-                <h1>Status: {status}</h1>
-                <button onClick={() => this.handleSubmit()}>Test</button>
+                <h1>Status: {this.props.status}</h1>
                 <form onSubmit={this.handleSubmit}>
                     <div>
                         <label>
                             Name
                         </label>
-                        <input>
+                        <input type="text" name="name" value={this.state.user.name} onChange={this.handleChange}>
                         </input>
                     </div>
                     <div>
                         <label>
                             Password
                         </label>
-                        <input>
+                        <input type="text" name="password" value={this.state.user.password} onChange={this.handleChange}>
                         </input>
                     </div>
                     <div>
                         <button>
                             Register
                         </button>
-                        {this.props.registering}
                         <Link to="/login">
                             Cancel
                         </Link>

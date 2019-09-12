@@ -1,5 +1,6 @@
 import CONSTANTS from '../_helpers/constants'
 import { userService } from '../_services';
+import { history } from '../_helpers';
 function register(name, password) {
     return dispatch => {
         dispatch({
@@ -13,6 +14,7 @@ function register(name, password) {
                     dispatch({
                         type: CONSTANTS.REGISTER_SUCCESS
                     });
+                    history.push("/login");
                 } else {
                     dispatch({
                         type: CONSTANTS.REGISTER_FAILURE
