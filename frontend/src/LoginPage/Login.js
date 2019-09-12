@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { userActions } from '../_actions'
 class Login extends Component {
     constructor(props) {
         super(props);
@@ -25,13 +26,13 @@ class Login extends Component {
     }
     handleSubmit(event) {
         event.preventDefault();
-        // this.props.register(this.state.user.name, this.state.user.password);
+        this.props.login(this.state.user.name, this.state.user.password);
     }
 
     render() {
         return (
             <div>
-                <h1>Login</h1>
+                <h1>Login: {this.props.token}</h1>
                 <form onSubmit={this.handleSubmit}>
                     <div>
                         <label>
@@ -61,12 +62,11 @@ class Login extends Component {
     }
 }
 function mapStateToProps(state) {
-    // const { status } = state.registration;
-    // return { status }
+    const { token } = state.user;
+    return { token }
 }
 const mapDispatchToProps = {
-    // register: registrationActions.register
+    login: userActions.login
 }
-const connectedLogin = connect()(Login)
-// export { connectedRegister as Register };
+const connectedLogin = connect(mapStateToProps, mapDispatchToProps)(Login)
 export { connectedLogin as Login };

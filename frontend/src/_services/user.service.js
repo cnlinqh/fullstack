@@ -12,8 +12,17 @@ function register(name, password) {
             name: name,
             password: password
         });
-}
+};
+
+function login(name, password) {
+    console.log("login as  " + name);
+    return axios.post(BACKEND_URL + "/user/accesstoken", {
+        name: name,
+        password: password
+    })
+};
 
 export const userService = {
-    register
+    register,
+    login
 }
