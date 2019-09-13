@@ -9,6 +9,7 @@ var secret = "thisisasecretstring";
 
 const router = express.Router();
 router.post('/signup', (req, res) => {
+    console.log('signup user '+ req.body.name);
     if (!req.body.name || !req.body.password) {
         res.json({ success: false, message: 'Input name && password.' });
     } else {
@@ -28,6 +29,7 @@ router.post('/signup', (req, res) => {
 
 // check password, then generate token for it if success
 router.post('/accesstoken', (req, res) => {
+    console.log('find user '+ req.body.name);
     User.findOne({
         name: req.body.name
     }, (err, user) => {
@@ -69,4 +71,36 @@ router.get('/user_info',
         res.json({ username: req.user.name });
     });
 
+router.get('/list', passport.authenticate('bearer', { session: false }), (req, res) => {
+    console.log('list all users');
+    User.find((err, results) => {
+        if (err) {
+            return res.json({ success: false, message: 'Find all failed!' });
+        } else {
+            var returnRes = results.map(ret => {
+                return {
+                    name: ret.name
+                }
+            });
+            res.json(returnRes);
+        }
+    })
+})
+
+router.delete('/delete', passport.authenticate('bearer', { session: false }), (req, res) => {
+    console.log('delete user ' + req.param("name"));
+    User.deleteOne({
+        name: req.param("name")
+    }, (err, result) => {
+        if (err) {
+            return res.json({ success: false, message: 'Delete failed!' });
+        } else {
+            if(result.deletedCount === 1){
+                return res.json({ success: true, message: 'Delete success!' });
+            }else{
+                return res.json({ success: false, message: 'Delete failed!' });
+            }
+        }
+    })
+})
 export default router;
