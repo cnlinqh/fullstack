@@ -2,12 +2,12 @@ import React, { Component } from "react";
 import Header from './Header';
 import Row from './Row'
 import axios from "axios";
-import './style.css'
+import '../style.css'
 import dotenv from 'dotenv'
 dotenv.config();
 var BACKEND_URL = `${process.env.REACT_APP_BACKEND_URL}`;
 console.log(BACKEND_URL);
-class App extends Component {
+class Table extends Component {
   state = {
     data: [],
     id: 0,
@@ -122,4 +122,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Table;

@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
+import Table from '../DataPage/Table'
 class Home extends Component {
     render() {
         return (
-            <h1>Home</h1>
+            <div>
+                <h1>Home</h1>
+                <Table/>
+            </div>
         )
     }
 }
