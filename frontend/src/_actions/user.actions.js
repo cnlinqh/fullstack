@@ -31,29 +31,42 @@ function register(name, password) {
 
 function login(name, password) {
     return dispatch => {
+        let currentUser = {};
         dispatch({
-            type: CONSTANTS.LOGIN_REQURST
+            type: CONSTANTS.LOGIN_REQURST,
+            currentUser
         });
+        localStorage.setItem("currentUser", JSON.stringify(currentUser));
         userService.login(name, password)
             .then(response => {
                 console.log(response);
                 var success = response.data.success;
                 if (success) {
+                    let currentUser = {
+                        name: response.data.name,
+                        token: response.data.token
+                    }
                     dispatch({
                         type: CONSTANTS.LOGIN_SUCCESS,
-                        token: response.data.token
+                        currentUser
                     });
+                    localStorage.setItem("currentUser", JSON.stringify(currentUser));
                     history.push("/");
                 } else {
+                    let currentUser = {};
                     dispatch({
-                        type: CONSTANTS.LOGIN_FAILURE
+                        type: CONSTANTS.LOGIN_FAILURE,
+                        currentUser
                     });
+                    localStorage.setItem("currentUser", JSON.stringify(currentUser));
                 }
             }).catch(function (error) {
-                console.log(error);
+                let currentUser = {};
                 dispatch({
-                    type: CONSTANTS.LOGIN_FAILURE
+                    type: CONSTANTS.LOGIN_FAILURE,
+                    currentUser
                 });
+                localStorage.setItem("currentUser", JSON.stringify(currentUser));
             });
     };
 }
