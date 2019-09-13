@@ -77,12 +77,12 @@ router.get('/list', passport.authenticate('bearer', { session: false }), (req, r
         if (err) {
             return res.json({ success: false, message: 'Find all failed!' });
         } else {
-            var returnRes = results.map(ret => {
+            var userList = results.map(ret => {
                 return {
                     name: ret.name
                 }
             });
-            res.json(returnRes);
+            return res.json({ success: true, userList });
         }
     })
 })
