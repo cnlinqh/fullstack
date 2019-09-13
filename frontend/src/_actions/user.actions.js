@@ -70,7 +70,38 @@ function login(name, password) {
             });
     };
 }
+
+function getUserList() {
+    return dispatch => {
+        dispatch({
+            type: CONSTANTS.USER_GET_REQUEST
+        });
+        userService.getUserList()
+            .then(response => {
+                console.log(response);
+
+                var success = response.data.success;
+                if (success) {
+                    dispatch({
+                        type: CONSTANTS.USER_GET_SUCCESS,
+                        userList: response.data.userList
+                    });
+                } else {
+                    dispatch({
+                        type: CONSTANTS.USER_GET_FAILURE
+                    });
+                }
+            }).catch(function (error) {
+                console.log(error);
+                dispatch({
+                    type: CONSTANTS.USER_GET_FAILURE
+                });
+            });
+    };
+}
+
 export const userActions = {
     register,
-    login
+    login,
+    getUserList
 };
