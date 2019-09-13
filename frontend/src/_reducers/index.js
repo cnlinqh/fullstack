@@ -1,12 +1,15 @@
 import { combineReducers } from 'redux';
 import { user } from './user.reducer';
+import { data } from './data.reducer';
 const rootReducer = combineReducers({
-    user
+    user,
+    data
 })
 
 // const rootReducer = function(state = {}, action){
 //     return {
-//         registration: registration(state.registration, action)
+//         user: user(state.user, action)
+//         data: data(state.data, action)
 //     }
 // }
 
