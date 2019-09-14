@@ -15,7 +15,7 @@ export function data(state = defaultState, action) {
             let { id, message } = action.message;
             let newState = Object.assign({}, state);
             newState.dataList = newState.dataList.map(msg => {
-                if (msg.id == id) {
+                if (msg.id === id) {
                     msg.message = message;
                 }
                 return msg;

@@ -47,12 +47,12 @@ class Data extends Component {
     }
 
     handleMessageUpdate(event) {
-        let item = this.findItemById(event.target.id);
+        let item = this.findItemById(parseInt(event.target.id));
         this.props.updateData(item._id, item.id, item.message);
     }
 
     handleMessageDelete(event) {
-        this.props.removeData(this.findItemById(event.target.id)._id);
+        this.props.removeData(this.findItemById(parseInt(event.target.id))._id);
     }
 
     handleMessageAdd() {
@@ -68,8 +68,7 @@ class Data extends Component {
         console.log(id);
         var re = {};
         for (var item of this.props.dataList) {
-            console.log(item.id == id)
-            if (item.id == id) {
+            if (item.id === id) {
                 re = item;
                 break;
             }
