@@ -21,7 +21,7 @@ class EditableCell extends Component {
     }
 
     onChange() {
-        this.props.handleMessageChange(this.props.id, this.refs.input.value);
+        this.props.handleMessageEditing(this.props.id, this.refs.input.value);
     }
 
     render() {
@@ -35,13 +35,20 @@ class Data extends Component {
 
     constructor(props) {
         super(props);
-        this.handleMessageChange = this.handleMessageChange.bind(this);
+        this.handleMessageEditing = this.handleMessageEditing.bind(this);
+        this.handleMessageUpdate = this.handleMessageUpdate.bind(this);
         this.handleMessageDelete = this.handleMessageDelete.bind(this);
         this.handleMessageAdd = this.handleMessageAdd.bind(this);
-        // this.findItemById = this.findItemById.bind(this);
+        this.findItemById = this.findItemById.bind(this);
     }
-    handleMessageChange(id, message) {
-        this.props.updateData(this.findItemById(id)._id, message);
+    handleMessageEditing(id, message) {
+        //this.props.updateData(this.findItemById(id)._id, message);
+        this.props.editingData(id, message);
+    }
+
+    handleMessageUpdate(event) {
+        let item = this.findItemById(event.target.id);
+        this.props.updateData(item._id, item.id, item.message);
     }
 
     handleMessageDelete(event) {
@@ -55,7 +62,6 @@ class Data extends Component {
             ++id;
         }
         this.props.createData(id, this.refs.input.value);
-
     }
 
     findItemById = (id) => {
@@ -104,10 +110,11 @@ class Data extends Component {
                                         {item.id}
                                     </td>
                                     <td>
-                                        <EditableCell id={item.id} message={item.message} handleMessageChange={this.handleMessageChange} />
+                                        <EditableCell id={item.id} message={item.message} handleMessageEditing={this.handleMessageEditing} />
                                     </td>
                                     <td>
                                         <button onClick={this.handleMessageDelete} id={item.id}>Delete</button>
+                                        <button onClick={this.handleMessageUpdate} id={item.id}>Update</button>
                                     </td>
                                 </tr>
                             ))
@@ -124,6 +131,7 @@ function mapStateToProps(state) {
 }
 const mapDispatchToProps = {
     getDataList: dataActions.getDataList,
+    editingData: dataActions.editingData,
     updateData: dataActions.updateData,
     removeData: dataActions.removeData,
     createData: dataActions.createData

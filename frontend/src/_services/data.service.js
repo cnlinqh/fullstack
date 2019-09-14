@@ -12,11 +12,16 @@ function getDataList() {
     });
 };
 
-function updateData(id, message) {
+function updateData(_id, id, message) {
     return axios.post(BACKEND_URL + "/api/updateData",
-        { id, message },
         {
-            headers: token.getTokenHeader()
+            id: _id,
+            update: {
+                id, message
+            }
+        },
+        {
+            headers: Object.assign({}, token.getTokenHeader(), { "Content-Type": "application/json" })
         });
 };
 

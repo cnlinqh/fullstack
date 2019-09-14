@@ -30,12 +30,24 @@ function getDataList() {
             });
     };
 }
-function updateData(id, message) {
+
+function editingData(id, message) {
+    return dispatch => {
+        dispatch({
+            type: CONSTANTS.DATA_EDITING,
+            message: {
+                id, message
+            }
+        })
+    }
+}
+
+function updateData(_id, id, message) {
     return dispatch => {
         dispatch({
             type: CONSTANTS.DATA_UPDATE_REQUEST
         });
-        dataService.updateData(id, message)
+        dataService.updateData(_id, id, message)
             .then(response => {
                 console.log(response);
                 var success = response.data.success;
@@ -118,6 +130,7 @@ function createData(id, message) {
 }
 export const dataActions = {
     getDataList,
+    editingData,
     updateData,
     removeData,
     createData
