@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { User } from '../UserPage';
+import { User } from '../HomePage';
 class Home extends Component {
     render() {
         return (
