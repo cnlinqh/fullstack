@@ -16,6 +16,8 @@ export function user(state = defaultState, action) {
             return Object.assign({}, state, { currentUser: action.currentUser });
         case CONSTANTS.LOGIN_FAILURE:
             return Object.assign({}, state, { currentUser: action.currentUser });
+        case CONSTANTS.TOKEN_CHECK_FAILURE:
+            return Object.assign({}, state, { currentUser: action.currentUser });
         case CONSTANTS.USER_GET_REQUEST:
             return Object.assign({}, state, { userList: [] });
         case CONSTANTS.USER_GET_SUCCESS:

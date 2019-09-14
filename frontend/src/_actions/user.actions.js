@@ -1,6 +1,6 @@
 import CONSTANTS from '../_helpers/constants'
 import { userService } from '../_services';
-import { history } from '../_helpers';
+import { history, token } from '../_helpers';
 function register(name, password) {
     return dispatch => {
         dispatch({
@@ -79,7 +79,6 @@ function getUserList() {
         userService.getUserList()
             .then(response => {
                 console.log(response);
-
                 var success = response.data.success;
                 if (success) {
                     dispatch({
@@ -96,6 +95,7 @@ function getUserList() {
                 dispatch({
                     type: CONSTANTS.USER_GET_FAILURE
                 });
+                token.checkToken(error, dispatch);
             });
     };
 }
