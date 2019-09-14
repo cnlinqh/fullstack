@@ -54,6 +54,7 @@ function updateData(id, message) {
                 dispatch({
                     type: CONSTANTS.DATA_UPDATE_FAILURE
                 });
+                token.checkToken(error, dispatch);
             });
     }
 }
@@ -82,6 +83,7 @@ function removeData(id) {
                 dispatch({
                     type: CONSTANTS.DATA_REMOVE_FAILURE
                 });
+                token.checkToken(error, dispatch);
             });
     }
 }
@@ -110,6 +112,7 @@ function createData(id, message) {
                 dispatch({
                     type: CONSTANTS.DATA_CREATE_FAILURE
                 });
+                token.checkToken(error, dispatch);
             });
     }
 }
