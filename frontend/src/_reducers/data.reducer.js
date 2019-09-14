@@ -1,6 +1,15 @@
 import CONSTANTS from '../_helpers/constants';
-var defaultState = [];
+var defaultState = { dataList: [] };
 
 export function data(state = defaultState, action) {
-    return state;
+    switch (action.type) {
+        case CONSTANTS.DATA_GET_REQUEST:
+            return Object.assign({}, state, { dataList: [] });
+        case CONSTANTS.DATA_GET_SUCCESS:
+            return Object.assign({}, state, { dataList: action.dataList });
+        case CONSTANTS.DATA_GET_FAILURE:
+            return Object.assign({}, state, { dataList: [] });
+        default:
+            return state;
+    }
 }
