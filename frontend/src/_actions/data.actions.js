@@ -9,7 +9,6 @@ function getDataList() {
         });
         dataService.getDataList()
             .then(response => {
-                console.log(response);
                 var success = response.data.success;
                 if (success) {
                     dispatch({
@@ -22,7 +21,6 @@ function getDataList() {
                     });
                 }
             }).catch(function (error) {
-                console.log(error);
                 dispatch({
                     type: CONSTANTS.DATA_GET_FAILURE
                 });
@@ -49,7 +47,6 @@ function updateData(_id, id, message) {
         });
         dataService.updateData(_id, id, message)
             .then(response => {
-                console.log(response);
                 var success = response.data.success;
                 if (success) {
                     dispatch({
@@ -62,7 +59,6 @@ function updateData(_id, id, message) {
                     });
                 }
             }).catch(function (error) {
-                console.log(error);
                 dispatch({
                     type: CONSTANTS.DATA_UPDATE_FAILURE
                 });
@@ -78,7 +74,6 @@ function removeData(id) {
         });
         dataService.removeData(id)
             .then(response => {
-                console.log(response);
                 var success = response.data.success;
                 if (success) {
                     dispatch({
@@ -91,7 +86,6 @@ function removeData(id) {
                     });
                 }
             }).catch(function (error) {
-                console.log(error);
                 dispatch({
                     type: CONSTANTS.DATA_REMOVE_FAILURE
                 });
@@ -107,7 +101,6 @@ function createData(id, message) {
         });
         dataService.createData(id, message)
             .then(response => {
-                console.log(response);
                 var success = response.data.success;
                 if (success) {
                     dispatch({
@@ -120,7 +113,6 @@ function createData(id, message) {
                     });
                 }
             }).catch(function (error) {
-                console.log(error);
                 dispatch({
                     type: CONSTANTS.DATA_CREATE_FAILURE
                 });

@@ -65,7 +65,6 @@ class Data extends Component {
     }
 
     findItemById = (id) => {
-        console.log(id);
         var re = {};
         for (var item of this.props.dataList) {
             if (item.id === id) {
@@ -73,7 +72,6 @@ class Data extends Component {
                 break;
             }
         }
-        console.log(JSON.stringify(re));
         return re;
     }
 

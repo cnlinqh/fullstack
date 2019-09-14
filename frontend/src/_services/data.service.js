@@ -3,10 +3,8 @@ import axios from "axios";
 import { token } from '../_helpers'
 dotenv.config();
 var BACKEND_URL = `${process.env.REACT_APP_BACKEND_URL}`;
-console.log(BACKEND_URL);
 
 function getDataList() {
-    console.log("get data list")
     return axios.get(BACKEND_URL + "/api/getData", {
         headers: token.getTokenHeader()
     });
@@ -26,7 +24,6 @@ function updateData(_id, id, message) {
 };
 
 function removeData(id) {
-    console.log("removeData")
     return axios.delete(BACKEND_URL + "/api/deleteData",
         {
             headers: token.getTokenHeader(),
@@ -35,7 +32,6 @@ function removeData(id) {
 };
 
 function createData(id, message) {
-    console.log("createData")
     return axios.post(BACKEND_URL + "/api/putData",
         { id, message },
         {

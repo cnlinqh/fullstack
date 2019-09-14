@@ -8,7 +8,6 @@ function register(name, password) {
         });
         userService.register(name, password)
             .then(response => {
-                console.log(response);
                 var success = response.data.success;
                 if (success) {
                     dispatch({
@@ -21,7 +20,6 @@ function register(name, password) {
                     });
                 }
             }).catch(function (error) {
-                console.log(error);
                 dispatch({
                     type: CONSTANTS.REGISTER_FAILURE
                 });
@@ -39,7 +37,6 @@ function login(name, password) {
         localStorage.setItem("currentUser", JSON.stringify(currentUser));
         userService.login(name, password)
             .then(response => {
-                console.log(response);
                 var success = response.data.success;
                 if (success) {
                     let currentUser = {
@@ -78,7 +75,6 @@ function getUserList() {
         });
         userService.getUserList()
             .then(response => {
-                console.log(response);
                 var success = response.data.success;
                 if (success) {
                     dispatch({
@@ -91,7 +87,6 @@ function getUserList() {
                     });
                 }
             }).catch(function (error) {
-                console.log(error);
                 dispatch({
                     type: CONSTANTS.USER_GET_FAILURE
                 });

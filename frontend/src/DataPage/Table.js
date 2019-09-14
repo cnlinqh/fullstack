@@ -6,7 +6,6 @@ import '../style.css'
 import dotenv from 'dotenv'
 dotenv.config();
 var BACKEND_URL = `${process.env.REACT_APP_BACKEND_URL}`;
-console.log(BACKEND_URL);
 class Table extends Component {
   state = {
     data: [],
@@ -47,13 +46,11 @@ class Table extends Component {
       .then(res => res.json())
       .then(data => {
         this.setState({ data: data.messages });
-        console.log(JSON.stringify(data.messages, null, 2));
       })
       .catch(err => console.log(err));
   };
 
   updateDataToDB = (idToUpdate, updateToApply) => {
-    console.log(idToUpdate + " : " + updateToApply)
     axios
       .post(BACKEND_URL + "/api/updateData", {
         id: this.findItemById(idToUpdate)._id,
@@ -62,7 +59,6 @@ class Table extends Component {
   };
 
   putDataToDB = message => {
-    console.log(message);
     let currentIds = this.state.data.map(data => data.id);
     let idToBeAdded = 0;
     while (currentIds.includes(idToBeAdded)) {
@@ -77,7 +73,6 @@ class Table extends Component {
   };
 
   deleteFromDB = idToDelete => {
-    console.log(idToDelete);
     axios
       .delete(BACKEND_URL + "/api/deleteData", {
         data: {
