@@ -1,8 +1,8 @@
 import React from 'react';
-import { Router, Route } from 'react-router-dom';
+import { Router, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { history } from '../_helpers';
-import { Home } from '../HomePage';
+import { Home, NotFound } from '../HomePage';
 import { Login } from '../LoginPage';
 import { Register } from '../RegisterPage';
 import { PrivateRoute } from '../AppPage'
@@ -13,11 +13,13 @@ class App extends React.Component {
         return (
             <div>
                 <Router history={history}>
-                    <div>
+                    <Switch>
                         <PrivateRoute exact path='/' component={Home}></PrivateRoute>
                         <Route path='/login' component={Login}></Route>
                         <Route path='/register' component={Register}></Route>
-                    </div>
+                        <Route path='/*' component={NotFound}></Route>
+                        {/* <Redirect from="/*" to="404"></Redirect> */}
+                    </Switch>
                 </Router>
             </div>
         )
