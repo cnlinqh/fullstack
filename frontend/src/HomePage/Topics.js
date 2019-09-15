@@ -1,16 +1,17 @@
 import React from 'react';
-import { Route, Link } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import { User, Data } from '../HomePage';
+import { MenuLink } from '../AppPage';
 function Topics({ match }) {
     return (
         <div>
             <h2>Topics</h2>
             <ul>
                 <li>
-                    <Link to={`${match.url}/user`}>User</Link>
+                    <MenuLink to={`${match.url}/user`} label="User"></MenuLink>
                 </li>
                 <li>
-                    <Link to={`${match.url}/data`}>Data</Link>
+                    <MenuLink to={`${match.url}/data`} label="Data"></MenuLink>
                 </li>
             </ul>
             <Route path={`${match.path}/:topicId`} component={Topic} />
