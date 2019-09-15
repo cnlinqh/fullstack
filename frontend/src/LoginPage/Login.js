@@ -32,7 +32,7 @@ class Login extends Component {
     render() {
         return (
             <div>
-                <h1>Login: {this.props.token}</h1>
+                <h2>Login: {this.props.token}</h2>
                 <form onSubmit={this.handleSubmit}>
                     <div>
                         <label>

@@ -31,7 +31,7 @@ class Register extends Component {
     render() {
         return (
             <div>
-                <h1>Status: {this.props.status}</h1>
+                <h2>Status: {this.props.status}</h2>
                 <form onSubmit={this.handleSubmit}>
                     <div>
                         <label>
