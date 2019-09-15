@@ -24,9 +24,9 @@ router.post('/putData', passport.authenticate('bearer', { session: false }), (re
     let data = new Data();
     data.id = id;
     data.message = message;
-    data.save((err) => {
+    data.save((err, node) => {
         if (err) return res.json({ success: false, error: err });
-        return res.json({ success: true });
+        return res.json({ success: true , node});
     })
 });
 
