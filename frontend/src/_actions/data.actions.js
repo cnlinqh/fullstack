@@ -50,9 +50,9 @@ function updateData(_id, id, message) {
                 var success = response.data.success;
                 if (success) {
                     dispatch({
-                        type: CONSTANTS.DATA_UPDATE_SUCCESS
+                        type: CONSTANTS.DATA_UPDATE_SUCCESS,
+                        node: response.data.node
                     });
-                    getDataList()(dispatch);
                 } else {
                     dispatch({
                         type: CONSTANTS.DATA_UPDATE_FAILURE
@@ -67,19 +67,19 @@ function updateData(_id, id, message) {
     }
 }
 
-function removeData(id) {
+function removeData(_id) {
     return dispatch => {
         dispatch({
             type: CONSTANTS.DATA_REMOVE_REQUEST
         });
-        dataService.removeData(id)
+        dataService.removeData(_id)
             .then(response => {
                 var success = response.data.success;
                 if (success) {
                     dispatch({
-                        type: CONSTANTS.DATA_REMOVE_SUCCESS
+                        type: CONSTANTS.DATA_REMOVE_SUCCESS,
+                        node: response.data.node
                     });
-                    getDataList()(dispatch);
                 } else {
                     dispatch({
                         type: CONSTANTS.DATA_REMOVE_FAILURE
@@ -107,7 +107,6 @@ function createData(id, message) {
                         type: CONSTANTS.DATA_CREATE_SUCCESS,
                         node: response.data.node
                     });
-                    //getDataList()(dispatch);
                 } else {
                     dispatch({
                         type: CONSTANTS.DATA_CREATE_FAILURE

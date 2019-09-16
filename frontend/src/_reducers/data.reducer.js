@@ -27,6 +27,15 @@ export function data(state = defaultState, action) {
         case CONSTANTS.DATA_UPDATE_REQUEST:
             return state;
         case CONSTANTS.DATA_UPDATE_SUCCESS:
+            // cloneState = immutability.cloneState(state);
+            // cloneState.dataList = cloneState.dataList.map(data => {
+            //     if(data._id === action.node._id){
+            //         data.message = action.node.update.message;
+            //     }
+            //     return data;
+            // });
+            // return cloneState;
+            // it seems not needed to update state, since DATA_EDITING already done
             return state;
         case CONSTANTS.DATA_UPDATE_FAILURE:
             return state;
@@ -35,7 +44,11 @@ export function data(state = defaultState, action) {
         case CONSTANTS.DATA_REMOVE_REQUEST:
             return state;
         case CONSTANTS.DATA_REMOVE_SUCCESS:
-            return state;
+            cloneState = immutability.cloneState(state);
+            cloneState.dataList = cloneState.dataList.filter(data => {
+                return action.node._id !== data._id;
+            });
+            return cloneState;
         case CONSTANTS.DATA_REMOVE_FAILURE:
             return state;
 

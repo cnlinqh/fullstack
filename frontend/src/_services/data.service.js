@@ -13,7 +13,7 @@ function getDataList() {
 function updateData(_id, id, message) {
     return axios.post(BACKEND_URL + "/api/updateData",
         {
-            id: _id,
+            _id: _id,
             update: {
                 id, message
             }
@@ -23,11 +23,11 @@ function updateData(_id, id, message) {
         });
 };
 
-function removeData(id) {
+function removeData(_id) {
     return axios.delete(BACKEND_URL + "/api/deleteData",
         {
             headers: token.getTokenHeader(),
-            data: { id }
+            data: { _id }
         });
 };
 
