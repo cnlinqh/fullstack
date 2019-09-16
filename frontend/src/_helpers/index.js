@@ -1,4 +1,5 @@
 export * from './history'
 export * from './store'
 export * from './token'
+export * from './immutability'
 // export * from './constants'

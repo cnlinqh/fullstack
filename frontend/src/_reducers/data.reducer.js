@@ -1,7 +1,9 @@
 import CONSTANTS from '../_helpers/constants';
+import { immutability } from '../_helpers';
 var defaultState = { dataList: [] };
 
 export function data(state = defaultState, action) {
+    var cloneState;
     switch (action.type) {
         case CONSTANTS.DATA_GET_REQUEST:
             return Object.assign({}, state, { dataList: [] });
@@ -13,14 +15,14 @@ export function data(state = defaultState, action) {
 
         case CONSTANTS.DATA_EDITING:
             let { id, message } = action.message;
-            let newState = Object.assign({}, state);
-            newState.dataList = newState.dataList.map(msg => {
+            cloneState = immutability.cloneState(state);
+            cloneState.dataList = cloneState.dataList.map(msg => {
                 if (msg.id === id) {
                     msg.message = message;
                 }
                 return msg;
             })
-            return newState;
+            return cloneState;
 
         case CONSTANTS.DATA_UPDATE_REQUEST:
             return state;
@@ -41,13 +43,11 @@ export function data(state = defaultState, action) {
         case CONSTANTS.DATA_CREATE_REQUEST:
             return state;
         case CONSTANTS.DATA_CREATE_SUCCESS:
-            let newState2 = {};
-            newState2.dataList = Object.assign([], state.dataList);
-            newState2.dataList.push(action.node);
-             return newState2;
+            cloneState = immutability.cloneState(state);
+            cloneState.dataList.push(action.node);
+            return cloneState;
         case CONSTANTS.DATA_CREATE_FAILURE:
             return state;
-
 
         default:
             return state;
