@@ -31,7 +31,7 @@ class App extends React.Component {
                             <li>
                                 <MenuLink activeOnlyWhenExact={true} to="/" label="Home"></MenuLink>
                             </li>
-                            {user.currentUser.name ? <div /> : <li><MenuLink to="/login" label="Login"></MenuLink></li>}
+                            {user.currentUser && user.currentUser.name ? <div /> : <li><MenuLink to="/login" label="Login"></MenuLink></li>}
                             <li>
                                 <MenuLink to="/register" label="Register"></MenuLink>
                             </li>
