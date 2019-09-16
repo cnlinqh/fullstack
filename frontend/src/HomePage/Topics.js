@@ -2,6 +2,7 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 import { User, Data } from '../HomePage';
 import { MenuLink } from '../AppPage';
+import Table from '../DataPage/Table';
 function Topics({ match }) {
     return (
         <div>
@@ -12,6 +13,9 @@ function Topics({ match }) {
                 </li>
                 <li>
                     <MenuLink to={`${match.url}/data`} label="Data"></MenuLink>
+                </li>
+                <li>
+                    <MenuLink to={`${match.url}/data2`} label="Data2"></MenuLink>
                 </li>
             </ul>
             <Route path={`${match.path}/:topicId`} component={Topic} />
@@ -28,6 +32,8 @@ function Topic({ match }) {
         return <User />;
     } else if (match.params.topicId === "data") {
         return <Data />
+    } else if (match.params.topicId === "data2") {
+        return <Table />
     }
     return (
         <div>

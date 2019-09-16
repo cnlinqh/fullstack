@@ -4,6 +4,7 @@ import Row from './Row'
 import axios from "axios";
 import '../style.css'
 import dotenv from 'dotenv'
+import { reqres } from '../_helpers'
 dotenv.config();
 var BACKEND_URL = `${process.env.REACT_APP_BACKEND_URL}`;
 class Table extends Component {
@@ -42,7 +43,7 @@ class Table extends Component {
   }
 
   getDataFromDB = () => {
-    fetch(BACKEND_URL + "/api/getData")
+    fetch(BACKEND_URL + "/api/getData", { headers: reqres.prepareRequestHeaders() })
       .then(res => res.json())
       .then(data => {
         this.setState({ data: data.messages });
@@ -53,9 +54,9 @@ class Table extends Component {
   updateDataToDB = (idToUpdate, updateToApply) => {
     axios
       .post(BACKEND_URL + "/api/updateData", {
-        id: this.findItemById(idToUpdate)._id,
+        _id: this.findItemById(idToUpdate)._id,
         update: { message: updateToApply }
-      });
+      }, { headers: Object.assign({}, reqres.prepareRequestHeaders(), { "Content-Type": "application/json" }) });
   };
 
   putDataToDB = message => {
@@ -68,6 +69,8 @@ class Table extends Component {
       .post(BACKEND_URL + "/api/putData", {
         id: idToBeAdded,
         message: message
+      }, {
+        headers: reqres.prepareRequestHeaders()
       })
       .then(() => this.getDataFromDB());
   };
@@ -75,8 +78,9 @@ class Table extends Component {
   deleteFromDB = idToDelete => {
     axios
       .delete(BACKEND_URL + "/api/deleteData", {
+        headers: reqres.prepareRequestHeaders(),
         data: {
-          id: this.findItemById(idToDelete)._id
+          _id: this.findItemById(idToDelete)._id
         }
       })
       .then(() => this.removeItemById(idToDelete));
@@ -86,7 +90,7 @@ class Table extends Component {
     return (
       <div>
         <div>
-            <h2>Backend URL: {BACKEND_URL}</h2>
+          <h3>Backend URL: {BACKEND_URL}</h3>
         </div>
         <div>
           <input
