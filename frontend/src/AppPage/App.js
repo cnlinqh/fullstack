@@ -6,14 +6,25 @@ import { Home, Topics } from '../HomePage';
 import { Login } from '../LoginPage';
 import { Register } from '../RegisterPage';
 import { PrivateRoute, MenuLink } from '../AppPage'
+import { alertActions } from '../_actions';
 
 class App extends React.Component {
+    constructor(props) {
+        super(props);
+
+        history.listen((location, action) => {
+            // clear alert on location change
+            this.props.clear();
+        });
+    }
     render() {
+        const { alert } = this.props;
         return (
             <div>
                 <header>
                     <h1>This is header part</h1>
                 </header>
+                {alert.msg && <div>{alert.msg}</div>}
                 <main>
                     <Router history={history}>
                         <ul>
@@ -44,5 +55,14 @@ class App extends React.Component {
         )
     }
 }
-const connectedApp = connect()(App);
+
+function mapStateToProps(state) {
+    const { alert } = state;
+    return { alert }
+}
+const mapDispatchToProps = {
+    clear: alertActions.clear,
+
+}
+const connectedApp = connect(mapStateToProps, mapDispatchToProps)(App);
 export { connectedApp as App };

@@ -22,7 +22,12 @@ function checkResponseError(error, dispatch) {
         history.push("/login");
     } else {
         if (error.toString() === "Error: Network Error") {
-            // alert("Backend test faild");
+            if (dispatch) {
+                dispatch({
+                    type: CONSTANTS.ALERT_FAILURE,
+                    msg: "Error: Network Error"
+                })
+            }
         }
     }
 }
