@@ -23,7 +23,7 @@ function register(name, password) {
                 dispatch({
                     type: CONSTANTS.REGISTER_FAILURE
                 });
-                reqres.checkResponseError(error,dispatch);
+                reqres.checkResponseError(error, dispatch);
             });
     };
 }
@@ -65,7 +65,7 @@ function login(name, password) {
                     currentUser
                 });
                 localStorage.setItem("currentUser", JSON.stringify(currentUser));
-                reqres.checkResponseError(error,dispatch);
+                reqres.checkResponseError(error, dispatch);
             });
     };
 }
@@ -105,9 +105,37 @@ function getUserList() {
     };
 }
 
+function deleteUser(name) {
+    return dispatch => {
+        dispatch({
+            type: CONSTANTS.USER_DELETE_REQUEST
+        });
+        userService.deleteUser(name)
+            .then(response => {
+                var success = response.data.success;
+                if (success) {
+                    dispatch({
+                        type: CONSTANTS.USER_DELETE_SUCCESS,
+                        name
+                    });
+                } else {
+                    dispatch({
+                        type: CONSTANTS.USER_DELETE_FAILURE
+                    });
+                }
+            }).catch(function (error) {
+                dispatch({
+                    type: CONSTANTS.USER_DELETE_FAILURE
+                });
+                reqres.checkResponseError(error, dispatch);
+            });
+    };
+}
+
 export const userActions = {
     register,
     login,
     logout,
-    getUserList
+    getUserList,
+    deleteUser
 };

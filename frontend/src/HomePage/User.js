@@ -8,7 +8,9 @@ class User extends Component {
     componentDidMount() {
         this.props.getUserList();
     }
-
+    handleDeleteUser(name) {
+        return (e) => this.props.deleteUser(name)
+    }
     render() {
         const { userList, currentUser } = this.props;
         return (
@@ -19,8 +21,8 @@ class User extends Component {
                 {
                     userList.map((user) => {
                         return (
-                            <li key={user.name}>
-                                {user.name}
+                            <li key={user.name}>{user.name}
+                                <span> - < button onClick={this.handleDeleteUser(user.name)}>Delete</button></span>
                             </li>
                         )
                     })
@@ -34,7 +36,8 @@ function mapStateToProps(state) {
     return { userList, currentUser }
 }
 const mapDispatchToProps = {
-    getUserList: userActions.getUserList
+    getUserList: userActions.getUserList,
+    deleteUser: userActions.deleteUser
 }
 const connectedUser = connect(mapStateToProps, mapDispatchToProps)(User)
 export { connectedUser as User };

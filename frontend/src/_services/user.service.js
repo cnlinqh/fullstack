@@ -29,9 +29,16 @@ function getUserList() {
     });
 }
 
+function deleteUser(name) {
+    return axios.delete(BACKEND_URL + "/user/delete?name=" + name, {
+        headers: reqres.prepareRequestHeaders()
+    });
+}
+
 export const userService = {
     register,
     login,
     logout,
-    getUserList
+    getUserList,
+    deleteUser
 }
