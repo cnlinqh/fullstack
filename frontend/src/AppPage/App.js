@@ -18,7 +18,7 @@ class App extends React.Component {
         });
     }
     render() {
-        const { alert } = this.props;
+        const { alert , user } = this.props;
         return (
             <div>
                 <header>
@@ -31,9 +31,7 @@ class App extends React.Component {
                             <li>
                                 <MenuLink activeOnlyWhenExact={true} to="/" label="Home"></MenuLink>
                             </li>
-                            <li>
-                                <MenuLink to="/login" label="Login"></MenuLink>
-                            </li>
+                            {user.currentUser.name ? <div /> : <li><MenuLink to="/login" label="Login"></MenuLink></li>}
                             <li>
                                 <MenuLink to="/register" label="Register"></MenuLink>
                             </li>
@@ -57,8 +55,8 @@ class App extends React.Component {
 }
 
 function mapStateToProps(state) {
-    const { alert } = state;
-    return { alert }
+    const { alert, user } = state;
+    return { alert, user }
 }
 const mapDispatchToProps = {
     clear: alertActions.clear,
