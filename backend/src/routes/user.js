@@ -43,7 +43,7 @@ router.post('/accesstoken', (req, res) => {
             user.comparePassword(req.body.password, (err, isMatch) => {
                 if (isMatch && !err) {
                     var token = jwt.sign({ name: user.name }, secret, {
-                        expiresIn: 10080 // token expire time
+                        expiresIn: 60*20 // token expire time, 20 min
                     });
                     user.token = token;
                     user.save(function (err) {

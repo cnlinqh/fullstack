@@ -17,7 +17,6 @@ const UserSchema = new Schema({
     }
 });
 
-// 添加用户保存时中间件对password进行bcrypt加密,这样保证用户密码只有用户本人知道
 UserSchema.pre('save', function (next) {
     var user = this;
     if (this.isModified('password') || this.isNew) {
@@ -37,7 +36,7 @@ UserSchema.pre('save', function (next) {
         return next();
     }
 });
-// 校验用户输入密码是否正确
+
 UserSchema.methods.comparePassword = function (passw, cb) {
     bcrypt.compare(passw, this.password, (err, isMatch) => {
         if (err) {
