@@ -1,6 +1,6 @@
 import CONSTANTS from '../_helpers/constants'
 import { dataService } from '../_services';
-import { token } from '../_helpers';
+import { reqres } from '../_helpers';
 
 function getDataList() {
     return dispatch => {
@@ -24,7 +24,7 @@ function getDataList() {
                 dispatch({
                     type: CONSTANTS.DATA_GET_FAILURE
                 });
-                token.checkToken(error, dispatch);
+                reqres.checkResponseError(error, dispatch);
             });
     };
 }
@@ -62,7 +62,7 @@ function updateData(_id, id, message) {
                 dispatch({
                     type: CONSTANTS.DATA_UPDATE_FAILURE
                 });
-                token.checkToken(error, dispatch);
+                reqres.checkResponseError(error, dispatch);
             });
     }
 }
@@ -89,7 +89,7 @@ function removeData(_id) {
                 dispatch({
                     type: CONSTANTS.DATA_REMOVE_FAILURE
                 });
-                token.checkToken(error, dispatch);
+                reqres.checkResponseError(error, dispatch);
             });
     }
 }
@@ -116,7 +116,7 @@ function createData(id, message) {
                 dispatch({
                     type: CONSTANTS.DATA_CREATE_FAILURE
                 });
-                token.checkToken(error, dispatch);
+                reqres.checkResponseError(error, dispatch);
             });
     }
 }

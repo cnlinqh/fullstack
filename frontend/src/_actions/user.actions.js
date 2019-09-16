@@ -1,6 +1,6 @@
 import CONSTANTS from '../_helpers/constants'
 import { userService } from '../_services';
-import { history, token } from '../_helpers';
+import { history, reqres } from '../_helpers';
 function register(name, password) {
     return dispatch => {
         dispatch({
@@ -23,6 +23,7 @@ function register(name, password) {
                 dispatch({
                     type: CONSTANTS.REGISTER_FAILURE
                 });
+                reqres.checkResponseError(error,dispatch);
             });
     };
 }
@@ -64,6 +65,7 @@ function login(name, password) {
                     currentUser
                 });
                 localStorage.setItem("currentUser", JSON.stringify(currentUser));
+                reqres.checkResponseError(error,dispatch);
             });
     };
 }
@@ -98,7 +100,7 @@ function getUserList() {
                 dispatch({
                     type: CONSTANTS.USER_GET_FAILURE
                 });
-                token.checkToken(error, dispatch);
+                reqres.checkResponseError(error, dispatch);
             });
     };
 }

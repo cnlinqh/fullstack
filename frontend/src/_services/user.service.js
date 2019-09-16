@@ -1,6 +1,6 @@
 import dotenv from 'dotenv';
 import axios from "axios";
-import { token } from '../_helpers'
+import { reqres } from '../_helpers'
 dotenv.config();
 var BACKEND_URL = `${process.env.REACT_APP_BACKEND_URL}`;
 
@@ -25,7 +25,7 @@ function logout() {
 
 function getUserList() {
     return axios.get(BACKEND_URL + "/user/list", {
-        headers: token.getTokenHeader()
+        headers: reqres.prepareRequestHeaders()
     });
 }
 
