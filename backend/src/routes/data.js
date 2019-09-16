@@ -26,23 +26,23 @@ router.post('/putData', passport.authenticate('bearer', { session: false }), (re
     data.message = message;
     data.save((err, node) => {
         if (err) return res.json({ success: false, error: err });
-        return res.json({ success: true , node});
+        return res.json({ success: true, node });
     })
 });
 
 router.delete('/deleteData', passport.authenticate('bearer', { session: false }), (req, res) => {
-    const { id } = req.body;
-    Data.findByIdAndRemove(id, (err) => {
+    const { _id } = req.body;
+    Data.findByIdAndRemove(_id, (err) => {
         if (err) return res.json({ success: false, error: err });
-        return res.json({ success: true });
+        return res.json({ success: true, node: { _id } });
     });
 });
 
 router.post('/updateData', passport.authenticate('bearer', { session: false }), (req, res) => {
-    const { id, update } = req.body;
-    Data.findByIdAndUpdate(id, update, (err) => {
+    const { _id, update } = req.body;
+    Data.findByIdAndUpdate(_id, update, (err) => {
         if (err) return res.json({ success: false, error: err });
-        return res.json({ success: true });
+        return res.json({ success: true, node: { _id, update } });
     });
 });
 
