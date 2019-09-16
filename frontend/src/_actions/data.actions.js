@@ -104,9 +104,10 @@ function createData(id, message) {
                 var success = response.data.success;
                 if (success) {
                     dispatch({
-                        type: CONSTANTS.DATA_CREATE_SUCCESS
+                        type: CONSTANTS.DATA_CREATE_SUCCESS,
+                        node: response.data.node
                     });
-                    getDataList()(dispatch);
+                    //getDataList()(dispatch);
                 } else {
                     dispatch({
                         type: CONSTANTS.DATA_CREATE_FAILURE

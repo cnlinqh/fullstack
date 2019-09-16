@@ -41,7 +41,10 @@ export function data(state = defaultState, action) {
         case CONSTANTS.DATA_CREATE_REQUEST:
             return state;
         case CONSTANTS.DATA_CREATE_SUCCESS:
-            return state;
+            let newState2 = {};
+            newState2.dataList = Object.assign([], state.dataList);
+            newState2.dataList.push(action.node);
+             return newState2;
         case CONSTANTS.DATA_CREATE_FAILURE:
             return state;
 
