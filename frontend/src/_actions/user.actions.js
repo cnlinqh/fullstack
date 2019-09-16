@@ -68,6 +68,14 @@ function login(name, password) {
     };
 }
 
+function logout() {
+    return dispatch => {
+        dispatch({
+            type: CONSTANTS.LOGOUT
+        });
+    }
+}
+
 function getUserList() {
     return dispatch => {
         dispatch({
@@ -98,5 +106,6 @@ function getUserList() {
 export const userActions = {
     register,
     login,
+    logout,
     getUserList
 };

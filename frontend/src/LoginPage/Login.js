@@ -5,6 +5,7 @@ import { userActions } from '../_actions'
 class Login extends Component {
     constructor(props) {
         super(props);
+        this.props.logout();
         this.state = {
             user: {
                 name: "",
@@ -66,7 +67,8 @@ function mapStateToProps(state) {
     return { token }
 }
 const mapDispatchToProps = {
-    login: userActions.login
+    login: userActions.login,
+    logout: userActions.logout
 }
 const connectedLogin = connect(mapStateToProps, mapDispatchToProps)(Login)
 export { connectedLogin as Login };

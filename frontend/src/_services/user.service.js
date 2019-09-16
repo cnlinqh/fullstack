@@ -19,13 +19,19 @@ function login(name, password) {
     })
 };
 
+function logout() {
+    localStorage.setItem("currentUser", JSON.stringify({}));
+}
+
 function getUserList() {
     return axios.get(BACKEND_URL + "/user/list", {
         headers: token.getTokenHeader()
     });
 }
+
 export const userService = {
     register,
     login,
+    logout,
     getUserList
 }

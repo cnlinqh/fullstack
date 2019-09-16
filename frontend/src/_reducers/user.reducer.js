@@ -1,8 +1,10 @@
 import CONSTANTS from '../_helpers/constants';
+import { immutability } from '../_helpers';
 var userlocal = localStorage.getItem("currentUser");
 var defaultState = { status: "NewReg", currentUser: JSON.parse(userlocal), userList: [] };
 
 export function user(state = defaultState, action) {
+    var cloneState;
     switch (action.type) {
         case CONSTANTS.REGISTER_REQUEST:
             return Object.assign({}, state, { status: "Registering" });
@@ -18,6 +20,10 @@ export function user(state = defaultState, action) {
             return Object.assign({}, state, { currentUser: action.currentUser });
         case CONSTANTS.TOKEN_CHECK_FAILURE:
             return Object.assign({}, state, { currentUser: action.currentUser });
+        case CONSTANTS.LOGOUT:
+            cloneState = immutability.cloneState(state);
+            cloneState.currentUser = {};
+            return cloneState;
         case CONSTANTS.USER_GET_REQUEST:
             return Object.assign({}, state, { userList: [] });
         case CONSTANTS.USER_GET_SUCCESS:
