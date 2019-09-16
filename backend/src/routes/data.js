@@ -38,12 +38,20 @@ router.delete('/deleteData', passport.authenticate('bearer', { session: false })
     });
 });
 
+router.delete('/deleteAll', passport.authenticate('bearer', { session: false }), (req, res) => {
+    Data.deleteMany({}, (err) => {
+        if (err) return res.json({ success: false, error: err });
+        return res.json({ success: true });
+    });
+});
+
 router.post('/updateData', passport.authenticate('bearer', { session: false }), (req, res) => {
     const { _id, update } = req.body;
     Data.findByIdAndUpdate(_id, update, (err) => {
         if (err) return res.json({ success: false, error: err });
         return res.json({ success: true, node: { _id, update } });
     });
+    Data.deleteMany
 });
 
 export default router;
