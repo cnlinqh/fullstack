@@ -22,7 +22,9 @@ class User extends Component {
                     userList.map((user) => {
                         return (
                             <li key={user.name}>{user.name}
-                                <span> - < button onClick={this.handleDeleteUser(user.name)}>Delete</button></span>
+                                {currentUser.name === user.name ? 
+                                    <span> - </span>:
+                                    <span> - < button onClick={this.handleDeleteUser(user.name)}>Delete</button></span>}
                             </li>
                         )
                     })
