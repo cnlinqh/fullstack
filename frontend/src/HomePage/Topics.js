@@ -6,24 +6,24 @@ import Table from '../DataPage/Table';
 function Topics({ match }) {
     return (
         <div>
-            <h2>Topics</h2>
+            <h2>Please select a topic:</h2>
             <ul>
                 <li>
                     <MenuLink to={`${match.url}/user`} label="User"></MenuLink>
                 </li>
                 <li>
-                    <MenuLink to={`${match.url}/data`} label="Data"></MenuLink>
+                    <MenuLink to={`${match.url}/data`} label="Tabel :React + Redux"></MenuLink>
                 </li>
                 <li>
-                    <MenuLink to={`${match.url}/data2`} label="Data2"></MenuLink>
+                    <MenuLink to={`${match.url}/data2`} label="Table: React"></MenuLink>
                 </li>
             </ul>
             <Route path={`${match.path}/:topicId`} component={Topic} />
-            <Route
+            {/* <Route
                 exact
                 path={match.path}
                 render={() => <h3>Please select a topic.</h3>}
-            />
+            /> */}
         </div>
     );
 }

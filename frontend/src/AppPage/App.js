@@ -2,11 +2,11 @@ import React from 'react';
 import { Router, Route, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { history } from '../_helpers';
-import { Home, Topics } from '../HomePage';
+import { Topics } from '../HomePage';
 import { Login } from '../LoginPage';
 import { Register } from '../RegisterPage';
-import { PrivateRoute, MenuLink } from '../AppPage'
-import { alertActions } from '../_actions';
+import { PrivateRoute } from '../AppPage'
+import { alertActions, userActions } from '../_actions';
 
 class App extends React.Component {
     constructor(props) {
@@ -18,34 +18,45 @@ class App extends React.Component {
         });
     }
     render() {
-        const { alert , user } = this.props;
+        const { alert, user } = this.props;
+        var loginStatus = user.currentUser && user.currentUser.name ? true : false;
         return (
             <div>
-                <header>
-                    <h1>This is header part</h1>
-                </header>
+                <div className="navbar navbar-inverse">
+                    <div className="container">
+                        {/* {loginStatus? <a className="navbar-brand">Welcome {user.currentUser.name}</a>:<div></div>} */}
+                        <ul className="nav navbar-nav navbar-right">
+                            <li>
+                                <a onClick={() => { history.push("/home"); }}>
+                                    <span className="glyphicon glyphicon-home" /> Home
+                                </a>
+                            </li>
+                            <li>
+                                {loginStatus ?
+                                    <a onClick={() => { this.props.logout(); history.push("/login"); }}>
+                                        <span className="glyphicon glyphicon-log-out" /> Logout
+                                    </a>
+                                    :
+                                    <a onClick={() => { history.push("/login"); }}>
+                                        <span className="glyphicon glyphicon-log-in" /> Login
+                                    </a>}
+                            </li>
+                            <li>
+                                <a onClick={() => { history.push("/register"); }}>
+                                    <span className="glyphicon glyphicon-registration-mark" /> Sign Up
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
                 {alert.msg && <div>{alert.msg}</div>}
                 <main>
                     <Router history={history}>
-                        <ul>
-                            <li>
-                                <MenuLink activeOnlyWhenExact={true} to="/" label="Home"></MenuLink>
-                            </li>
-                            {user.currentUser && user.currentUser.name ? <div /> : <li><MenuLink to="/login" label="Login"></MenuLink></li>}
-                            <li>
-                                <MenuLink to="/register" label="Register"></MenuLink>
-                            </li>
-                            <li>
-                                <MenuLink to="/topics" label="Topics"></MenuLink>
-                            </li>
-                        </ul>
                         <Switch>{/* Switch make sure there is one one Route will be matched */}
-                            <PrivateRoute exact path='/' component={Home}></PrivateRoute>
+                            <PrivateRoute path='/home' component={Topics}></PrivateRoute>
                             <Route path='/login' component={Login}></Route>
                             <Route path='/register' component={Register}></Route>
-                            <Route path='/topics' component={Topics}></Route>
-                            {/*<Route path='/*' component={NotFound}></Route>*/}
-                            <Redirect to="/"></Redirect>
+                            <Redirect to="/home"></Redirect>
                         </Switch>
                     </Router>
                 </main>
@@ -60,6 +71,7 @@ function mapStateToProps(state) {
 }
 const mapDispatchToProps = {
     clear: alertActions.clear,
+    logout: userActions.logout
 
 }
 const connectedApp = connect(mapStateToProps, mapDispatchToProps)(App);
