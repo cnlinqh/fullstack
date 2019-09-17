@@ -22,33 +22,44 @@ class App extends React.Component {
         var loginStatus = user.currentUser && user.currentUser.name ? true : false;
         return (
             <div>
-                <div className="navbar navbar-inverse">
+                <nav className="navbar navbar-inverse" >
                     <div className="container">
-                        {/* {loginStatus? <a className="navbar-brand">Welcome {user.currentUser.name}</a>:<div></div>} */}
-                        <ul className="nav navbar-nav navbar-right">
-                            <li>
-                                <a onClick={() => { history.push("/home"); }}>
-                                    <span className="glyphicon glyphicon-home" /> Home
-                                </a>
-                            </li>
-                            <li>
-                                {loginStatus ?
-                                    <a onClick={() => { this.props.logout(); history.push("/login"); }}>
-                                        <span className="glyphicon glyphicon-log-out" /> Logout
-                                    </a>
-                                    :
-                                    <a onClick={() => { history.push("/login"); }}>
-                                        <span className="glyphicon glyphicon-log-in" /> Login
-                                    </a>}
-                            </li>
-                            <li>
-                                <a onClick={() => { history.push("/register"); }}>
-                                    <span className="glyphicon glyphicon-registration-mark" /> Sign Up
-                                </a>
-                            </li>
-                        </ul>
+                        <div className="navbar-header">
+                            <button type="button" className="navbar-toggle" data-toggle="collapse"
+                                data-target="#cnlinqh-navbar-collapse">
+                                <span className="sr-only">Toggle navigation</span>
+                                <span className="icon-bar"></span>
+                                <span className="icon-bar"></span>
+                                <span className="icon-bar"></span>
+                            </button>
+                            {loginStatus? <a className="navbar-brand">Welcome {user.currentUser.name}</a>:<div></div>}
+                        </div>
+                        <div className="collapse navbar-collapse" id="cnlinqh-navbar-collapse">
+                            <ul className="nav navbar-nav navbar-right">
+                                <li>
+                                    <a onClick={() => { history.push("/home"); }}>
+                                        <span className="glyphicon glyphicon-home" /> Home
+	                                 </a>
+                                </li>
+                                <li>
+                                    {loginStatus ?
+                                        <a onClick={() => { this.props.logout(); history.push("/login"); }}>
+                                            <span className="glyphicon glyphicon-log-out" /> Logout
+	                                     </a>
+                                        :
+                                        <a onClick={() => { history.push("/login"); }}>
+                                            <span className="glyphicon glyphicon-log-in" /> Login
+	                                     </a>}
+                                </li>
+                                <li>
+                                    <a onClick={() => { history.push("/register"); }}>
+                                        <span className="glyphicon glyphicon-registration-mark" /> Sign Up
+	                                 </a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
+                </nav>
                 {alert.msg && <div>{alert.msg}</div>}
                 <main>
                     <Router history={history}>
