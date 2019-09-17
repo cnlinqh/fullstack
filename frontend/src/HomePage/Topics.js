@@ -12,10 +12,10 @@ function Topics({ match }) {
                     <MenuLink to={`${match.url}/user`} label="User"></MenuLink>
                 </li>
                 <li>
-                    <MenuLink to={`${match.url}/data`} label="Tabel :React + Redux"></MenuLink>
+                    <MenuLink to={`${match.url}/data`} label="Table: React + Redux"></MenuLink>
                 </li>
                 <li>
-                    <MenuLink to={`${match.url}/data2`} label="Table: React"></MenuLink>
+                    <MenuLink to={`${match.url}/data2`} label="Table: Pure React"></MenuLink>
                 </li>
             </ul>
             <Route path={`${match.path}/:topicId`} component={Topic} />

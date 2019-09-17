@@ -5,6 +5,8 @@ import { store } from './_helpers';
 import { App } from './AppPage/App'
 //import * as serviceWorker from './serviceWorker';
 
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/js/bootstrap.js';
 ReactDOM.render(
     <Provider store={store}>
         <App />

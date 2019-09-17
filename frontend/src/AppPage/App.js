@@ -71,7 +71,7 @@ class App extends React.Component {
                         </Switch>
                     </Router>
                 </main>
-                <div class="text-center">
+                <div className="text-center">
                     <p>
                         <a href="https://github.com/cnlinqh/nodejs-fullstack" target="_blank">
                             React + Redux + Bootstrap + Nodejs + Mongo example,target to be deployed to k8s + docker</a>
