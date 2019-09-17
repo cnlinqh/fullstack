@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import Header from './Header';
 import Row from './Row'
 import axios from "axios";
-import '../style.css'
 import dotenv from 'dotenv'
 import { reqres } from '../_helpers'
 dotenv.config();
@@ -97,7 +96,6 @@ class Table extends Component {
             type="text"
             onChange={e => this.setState({ message: e.target.value })}
             placeholder="Message"
-            className="input"
           />
           <button onClick={() => this.putDataToDB(this.state.message)}>Add</button>
           <button onClick={() => this.getDataFromDB()}>Refresh</button>

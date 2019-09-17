@@ -9,7 +9,7 @@ class EditableCell extends Component {
     }
 
     onFocus() {
-        this.setState({ editing: true },()=>{
+        this.setState({ editing: true }, () => {
             this.refs.input.focus();
             this.refs.input.value = this.props.message;
         });
@@ -18,14 +18,14 @@ class EditableCell extends Component {
         this.setState({ editing: false });
     }
 
-    onChange(){
+    onChange() {
         this.props.handleMessageChang(this.refs.input.value);
     }
-    
+
     render() {
-        return this.state.editing?
-        <input className="editingCell" ref='input'  onBlur={()=>this.onBlur()} onChange={()=>this.onChange()}></input>:
-        <div  onClick={()=>this.onFocus()}>{this.props.message}</div>
+        return this.state.editing ?
+            <input ref='input' onBlur={() => this.onBlur()} onChange={() => this.onChange()}></input> :
+            <div onClick={() => this.onFocus()}>{this.props.message}</div>
     }
 }
 export default EditableCell;
