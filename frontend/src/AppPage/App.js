@@ -32,7 +32,7 @@ class App extends React.Component {
                                 <span className="icon-bar"></span>
                                 <span className="icon-bar"></span>
                             </button>
-                            {loginStatus? <a className="navbar-brand">Welcome {user.currentUser.name}</a>:<div></div>}
+                            {loginStatus ? <a className="navbar-brand">Welcome {user.currentUser.name}</a> : <div></div>}
                         </div>
                         <div className="collapse navbar-collapse" id="cnlinqh-navbar-collapse">
                             <ul className="nav navbar-nav navbar-right">
@@ -71,6 +71,12 @@ class App extends React.Component {
                         </Switch>
                     </Router>
                 </main>
+                <div class="text-center">
+                    <p>
+                        <a href="https://github.com/cnlinqh/nodejs-fullstack" target="_blank">
+                            React + Redux + Bootstrap + Nodejs + Mongo example,target to be deployed to k8s + docker</a>
+                    </p>
+                </div>
             </div>
         )
     }
