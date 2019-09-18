@@ -18,6 +18,6 @@ deploy(){
     kubectl create -f k8s
 }
 
-frontend
-backend
-deploy
+#frontend
+#backend
+#deploy
