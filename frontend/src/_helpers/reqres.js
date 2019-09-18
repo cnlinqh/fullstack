@@ -20,6 +20,10 @@ function checkResponseError(error, dispatch) {
         }
         localStorage.setItem("currentUser", JSON.stringify(currentUser));
         history.push("/login");
+        dispatch({
+            type: CONSTANTS.ALERT_FAILURE,
+            msg: "Authentication failed, please login"
+        });
     } else {
         if (error.toString() === "Error: Network Error") {
             if (dispatch) {
