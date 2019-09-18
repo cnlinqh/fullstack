@@ -61,7 +61,7 @@ class App extends React.Component {
                     </div>
                 </nav>
                 {alert.msg && <div>{alert.msg}</div>}
-                <main>
+                <main className="row">
                     <Router history={history}>
                         <Switch>{/* Switch make sure there is one one Route will be matched */}
                             <PrivateRoute path='/home' component={Topics}></PrivateRoute>
@@ -71,12 +71,19 @@ class App extends React.Component {
                         </Switch>
                     </Router>
                 </main>
-                <div className="text-center">
-                    <p>
-                        <a href="https://github.com/cnlinqh/nodejs-fullstack" target="_blank">
-                            React + Redux + Bootstrap + Nodejs + Mongo example,target to be deployed to k8s + docker</a>
-                    </p>
-                </div>
+                <footer class="footer navbar-fixed-bottom  font-small blue pt-4">
+                    <div class="container-fluid text-center text-md-left">
+                        <div class="row">
+                            <div className="row text-center">
+                                React + Redux + Bootstrap + Nodejs + Mongo example, target to be deployed to k8s + docker
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footer-copyright text-center py-3">
+                        © 2019 Copyright:
+                        <a href="https://github.com/cnlinqh/nodejs-fullstack">https://github.com/cnlinqh/nodejs-fullstack</a>
+                    </div>
+                </footer>
             </div>
         )
     }

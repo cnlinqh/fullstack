@@ -5,7 +5,7 @@ import { MenuLink } from '../AppPage';
 import Table from '../DataPage/Table';
 function Topics({ match }) {
     return (
-        <div>
+        <div className="col-md-6, col-md-offset-3">
             <h2>Please select a topic:</h2>
             <ul>
                 <li>

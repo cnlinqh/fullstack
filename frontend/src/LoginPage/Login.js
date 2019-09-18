@@ -32,30 +32,26 @@ class Login extends Component {
 
     render() {
         return (
-            <div>
-                <h2>Login: {this.props.token}</h2>
-                <form onSubmit={this.handleSubmit}>
-                    <div>
+            <div className="col-md-6 col-md-offset-3">
+                <h2>Login</h2>
+                <form name="form" onSubmit={this.handleSubmit}>
+                    <div className="form-group">
                         <label>
                             Name
                         </label>
-                        <input type="text" name="name" value={this.state.user.name} onChange={this.handleChange}>
+                        <input className="form-control" type="text" name="name" value={this.state.user.name} onChange={this.handleChange}>
                         </input>
                     </div>
-                    <div>
+                    <div className="form-group">
                         <label>
                             Password
                         </label>
-                        <input type="text" name="password" value={this.state.user.password} onChange={this.handleChange}>
+                        <input className="form-control" type="text" name="password" value={this.state.user.password} onChange={this.handleChange}>
                         </input>
                     </div>
-                    <div>
-                        <button>
-                            Login
-                        </button>
-                        <Link to="/register">
-                            Register
-                        </Link>
+                    <div className="form-group">
+                        <button className="btn btn-primary">Login</button>
+                        <Link className="btn btn-link" to="/register">Register</Link>
                     </div>
                 </form>
             </div>
