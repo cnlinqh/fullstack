@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { userActions } from '../_actions';
 
@@ -15,16 +14,15 @@ class User extends Component {
         const { userList, currentUser } = this.props;
         return (
             <div>
-                <h3>Welcome: {currentUser.name}</h3>
-                <Link to="/login">Logout</Link>
+                <h3>Welcome: '{currentUser.name}' ! You're logged in with React</h3>
                 <h3>All registered users:</h3>
                 {
                     userList.map((user) => {
                         return (
                             <li key={user.name}>{user.name}
-                                {currentUser.name === user.name ? 
-                                    <span> - </span>:
-                                    <span> - < button onClick={this.handleDeleteUser(user.name)}>Delete</button></span>}
+                                {currentUser.name === user.name ?
+                                    <span> - </span> :
+                                    <span> - < a onClick={this.handleDeleteUser(user.name)}>Delete</a></span>}
                             </li>
                         )
                     })

@@ -26,8 +26,8 @@ class EditableCell extends Component {
 
     render() {
         return this.state.editing ?
-            <input ref='input' onBlur={() => this.onBlur()} onChange={() => this.onChange()}></input> :
-            <div onClick={() => this.onFocus()}>{this.props.message}</div>
+            <input className="col-md-12" ref='input' onBlur={() => this.onBlur()} onChange={() => this.onChange()}></input> :
+            <div className="col-md-12" onClick={() => this.onFocus()}>{this.props.message}</div>
     }
 }
 
@@ -84,41 +84,54 @@ class Data extends Component {
         return (
             <div>
                 <h3>All data:</h3>
-                < div>
-                    <input ref="input"
-                        type="text"
-                    />
-                    <button onClick={this.handleMessageAdd}>Add</button>
-                    <button onClick={() => this.props.getDataList()} >Refresh</button>
+
+                < div className="row">
+                    <table className="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th className="text-center">ID</th>
+                                <th className="text-center">Message</th>
+                                <th className="text-center">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td className="col-md-1">
+
+                                </td>
+                                <td className="col-md-9">
+                                    <input className="col-md-12" ref="input" type="text" />
+                                </td>
+                                <td className="col-md-2 text-center">
+                                    <div className="btn-group text-center" role="group">
+                                        <button type="button" className="btn btn-success glyphicon glyphicon-plus" onClick={this.handleMessageAdd} />
+                                        <button type="button" className="btn btn-info glyphicon glyphicon-refresh" onClick={() => this.props.getDataList()} />
+                                    </div>
+                                </td>
+                            </tr>
+                            {
+                                dataList.map(item => (
+                                    <tr key={item.id}>
+                                        <td className="col-md-1">
+                                            {item.id}
+                                        </td>
+                                        <td className="col-md-9">
+                                            <EditableCell id={item.id} message={item.message} handleMessageEditing={this.handleMessageEditing} />
+                                        </td>
+                                        <td className="col-md-2 text-center">
+                                            <div className="btn-group" role="group">
+                                                <button type="button" className="btn btn-warning glyphicon glyphicon-save" onClick={this.handleMessageUpdate} id={item.id} />
+                                                <button type="button" className="btn btn-danger glyphicon glyphicon-remove" onClick={this.handleMessageDelete} id={item.id}></button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                ))
+                            }
+                        </tbody>
+                    </table>
                 </div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Message</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            dataList.map(item => (
-                                <tr key={item.id}>
-                                    <td>
-                                        {item.id}
-                                    </td>
-                                    <td>
-                                        <EditableCell id={item.id} message={item.message} handleMessageEditing={this.handleMessageEditing} />
-                                    </td>
-                                    <td>
-                                        <button onClick={this.handleMessageDelete} id={item.id}>Delete</button>
-                                        <button onClick={this.handleMessageUpdate} id={item.id}>Update</button>
-                                    </td>
-                                </tr>
-                            ))
-                        }
-                    </tbody>
-                </table>
             </div>
+
         )
     }
 }
