@@ -81,7 +81,7 @@ class App extends React.Component {
                     <div className="container-fluid text-center text-md-left">
                         <div className="row">
                             <div className="row text-center">
-                                React + Redux + Bootstrap + Nodejs + Mongo example, target to be deployed to k8s + docker
+                                React + Redux + Bootstrap + Nodejs + Express + Mongo example, target to be deployed to k8s + docker
                             </div>
                         </div>
                     </div>
