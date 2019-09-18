@@ -13,10 +13,18 @@ function register(name, password) {
                     dispatch({
                         type: CONSTANTS.REGISTER_SUCCESS
                     });
-                    history.push("/login");
+                    // history.push("/login");
+                    dispatch({
+                        type: CONSTANTS.ALERT_SUCCESS,
+                        msg: "Sign up succeeded, please login"
+                    });
                 } else {
                     dispatch({
                         type: CONSTANTS.REGISTER_FAILURE
+                    });
+                    dispatch({
+                        type: CONSTANTS.ALERT_FAILURE,
+                        msg: "Sign up failed"
                     });
                 }
             }).catch(function (error) {

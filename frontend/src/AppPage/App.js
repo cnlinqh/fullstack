@@ -60,7 +60,13 @@ class App extends React.Component {
                         </div>
                     </div>
                 </nav>
-                {alert.msg && <div>{alert.msg}</div>}
+                <div className="row">
+                    {alert.msg &&
+                        <div className={`col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 alert ${alert.type}`}>
+                            {alert.msg}
+                        </div>
+                    }
+                </div>
                 <main className="row">
                     <Router history={history}>
                         <Switch>{/* Switch make sure there is one one Route will be matched */}

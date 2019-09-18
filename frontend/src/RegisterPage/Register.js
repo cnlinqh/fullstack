@@ -29,7 +29,12 @@ class Register extends Component {
     handleSubmit(event) {
         event.preventDefault();
         this.setState({ submitted: true })
-        this.props.register(this.state.user.name, this.state.user.password);
+        if (this.state.user.name
+            && this.state.user.password
+            && this.state.user.password2
+            && this.state.user.password === this.state.user.password2) {
+            this.props.register(this.state.user.name, this.state.user.password);
+        }
     }
     render() {
         const { user, submitted } = this.state;
@@ -50,7 +55,7 @@ class Register extends Component {
                     <div className="form-group">
                         <label>Confirm Password</label>
                         <input className="form-control" type="password" name="password2" value={this.state.user.password2} onChange={this.handleChange}></input>
-                        {submitted && user.password!==user.password2 && <div className="help-block">Password is not identical</div>}
+                        {submitted && user.password !== user.password2 && <div className="help-block">Password is not identical</div>}
                     </div>
                     <div className="form-group">
                         <button className="btn btn-primary">Register</button>
