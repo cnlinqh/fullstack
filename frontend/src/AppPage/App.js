@@ -71,15 +71,15 @@ class App extends React.Component {
                         </Switch>
                     </Router>
                 </main>
-                <footer class="footer navbar-fixed-bottom  font-small blue pt-4">
-                    <div class="container-fluid text-center text-md-left">
-                        <div class="row">
+                <footer className="footer navbar-fixed-bottom  font-small blue pt-4">
+                    <div className="container-fluid text-center text-md-left">
+                        <div className="row">
                             <div className="row text-center">
                                 React + Redux + Bootstrap + Nodejs + Mongo example, target to be deployed to k8s + docker
                             </div>
                         </div>
                     </div>
-                    <div class="footer-copyright text-center py-3">
+                    <div className="footer-copyright text-center py-3">
                         © 2019 Copyright:
                         <a href="https://github.com/cnlinqh/nodejs-fullstack">https://github.com/cnlinqh/nodejs-fullstack</a>
                     </div>
