@@ -120,7 +120,7 @@ class Data extends Component {
                                         </td>
                                         <td className="col-md-2 text-center">
                                             <div className="btn-group" role="group">
-                                                <button type="button" className="btn btn-warning glyphicon glyphicon-save" onClick={this.handleMessageUpdate} id={item.id} />
+                                                <button type="button" className="btn btn-warning glyphicon glyphicon-floppy-save" onClick={this.handleMessageUpdate} id={item.id} />
                                                 <button type="button" className="btn btn-danger glyphicon glyphicon-remove" onClick={this.handleMessageDelete} id={item.id}></button>
                                             </div>
                                         </td>

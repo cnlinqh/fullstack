@@ -19,6 +19,7 @@ export function data(state = defaultState, action) {
             cloneState.dataList = cloneState.dataList.map(msg => {
                 if (msg.id === id) {
                     msg.message = message;
+                    msg.editing = true;
                 }
                 return msg;
             })
