@@ -65,6 +65,10 @@ function login(name, password) {
                         currentUser
                     });
                     localStorage.setItem("currentUser", JSON.stringify(currentUser));
+                    dispatch({
+                        type: CONSTANTS.ALERT_FAILURE,
+                        msg: "Login failed, please try again"
+                    });
                 }
             }).catch(function (error) {
                 let currentUser = {};
