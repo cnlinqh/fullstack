@@ -5,17 +5,17 @@ import { MenuLink } from '../AppPage';
 import Table from '../DataPage/Table';
 function Topics({ match }) {
     return (
-        <div className="col-md-6, col-md-offset-3">
-            <h2>Please select a topic:</h2>
+        <div className="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+            <h2>Please select a topic</h2>
             <ul>
                 <li>
                     <MenuLink to={`${match.url}/user`} label="User"></MenuLink>
                 </li>
                 <li>
-                    <MenuLink to={`${match.url}/data`} label="Table: React + Redux"></MenuLink>
+                    <MenuLink to={`${match.url}/rr`} label="Table: React + Redux"></MenuLink>
                 </li>
                 <li>
-                    <MenuLink to={`${match.url}/data2`} label="Table: Pure React"></MenuLink>
+                    <MenuLink to={`${match.url}/pr`} label="Table: Pure React"></MenuLink>
                 </li>
             </ul>
             <Route path={`${match.path}/:topicId`} component={Topic} />
@@ -30,9 +30,9 @@ function Topics({ match }) {
 function Topic({ match }) {
     if (match.params.topicId === "user") {
         return <User />;
-    } else if (match.params.topicId === "data") {
+    } else if (match.params.topicId === "rr") {
         return <Data />
-    } else if (match.params.topicId === "data2") {
+    } else if (match.params.topicId === "pr") {
         return <Table />
     }
     return (
