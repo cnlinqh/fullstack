@@ -84,8 +84,7 @@ class Data extends Component {
         return (
             <div>
                 <h3>All data:</h3>
-
-                < div className="row">
+                < div className="row scrollable">
                     <table className="table table-striped table-bordered">
                         <thead>
                             <tr>

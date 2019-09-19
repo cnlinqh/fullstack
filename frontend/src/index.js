@@ -7,6 +7,7 @@ import { App } from './AppPage/App'
 import 'jquery/src/jquery';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.js';
+import './style.css';
 ReactDOM.render(
     <Provider store={store}>
         <App />

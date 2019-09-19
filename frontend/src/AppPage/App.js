@@ -22,7 +22,7 @@ class App extends React.Component {
         var loginStatus = user.currentUser && user.currentUser.name ? true : false;
         return (
             <div>
-                <nav className="navbar navbar-inverse" >
+                <header className="navbar navbar-inverse" >
                     <div className="container">
                         <div className="navbar-header">
                             <button type="button" className="navbar-toggle" data-toggle="collapse"
@@ -59,7 +59,7 @@ class App extends React.Component {
                             </ul>
                         </div>
                     </div>
-                </nav>
+                </header>
                 <div className="row">
                     {alert.msg &&
                         <div className={`col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 alert ${alert.type}`}>
@@ -77,18 +77,9 @@ class App extends React.Component {
                         </Switch>
                     </Router>
                 </main>
-                <footer className="footer navbar-fixed-bottom  font-small blue pt-4">
-                    <div className="container-fluid text-center text-md-left">
-                        <div className="row">
-                            <div className="row text-center">
-                                React + Redux + Bootstrap + Nodejs + Express + Mongo example, target to be deployed to k8s + docker
-                            </div>
-                        </div>
-                    </div>
-                    <div className="footer-copyright text-center py-3">
-                        © 2019 Copyright:
-                        <a href="https://github.com/cnlinqh/nodejs-fullstack">https://github.com/cnlinqh/nodejs-fullstack</a>
-                    </div>
+                <footer className="navbar navbar-fixed-bottom text-center">
+                    <div className="row">React + Redux + Bootstrap + Nodejs + Express + Mongo example, target to be deployed to k8s + docker</div>
+                    <div className="row">© 2019 Copyright <a href="https://github.com/cnlinqh/nodejs-fullstack">https://github.com/cnlinqh/nodejs-fullstack</a></div>
                 </footer>
             </div>
         )
