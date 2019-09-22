@@ -41,7 +41,7 @@ class _RegisterPageState extends State<RegisterPage> {
     );
 
     final registerButton = RaisedButton(
-      child: Text("Sign In"),
+      child: Text("Register"),
       onPressed: () {},
     );
 
@@ -53,7 +53,7 @@ class _RegisterPageState extends State<RegisterPage> {
     );
     return Scaffold(
       appBar: AppBar(
-        title: Text("Sign Up"),
+        title: Text("Register"),
       ),
       body: Container(
         child: Column(

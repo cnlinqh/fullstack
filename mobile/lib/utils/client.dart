@@ -1,16 +1,16 @@
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+import 'package:dio/dio.dart';
+import './service.dart';
 
-void main() {
-  var body = request();
-  body.then((value) {
-    var obj = jsonDecode(value);
-    print(obj["token"]);
-  });
+Future<String> userSignUp(name, password) async {
+  var dio = Dio();
+  Response res = await dio
+      .post(path['user']['signup'], data: {"name": name, "password": password});
+  return res.data.toString();
 }
 
-Future<String> request() async {
-  var url = 'http://localhost:3001/user/accesstoken';
-  var response = await http.post(url, body: {"name": 'aaa', "password": 'aaa'});
-  return response.body;
+Future<String> userLogin(name, password) async {
+  var dio = Dio();
+  Response res = await dio
+      .post(path['user']['login'], data: {"name": name, "password": password});
+  return res.data.toString();
 }
