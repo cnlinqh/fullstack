@@ -1,16 +1,25 @@
 import 'package:dio/dio.dart';
-import './service.dart';
+import 'package:mobile/utils/service.dart';
+import 'package:mobile/utils/reqres.dart';
 
-Future<String> userSignUp(name, password) async {
-  var dio = Dio();
-  Response res = await dio
-      .post(path['user']['signup'], data: {"name": name, "password": password});
-  return res.data.toString();
+Future userSignUp(name, password) async {
+  try {
+    var dio = Dio();
+    Response res = await dio.post(path['user']['signup'],
+        data: {"name": name, "password": password});
+    return res.data;
+  } catch (error) {
+    return "";
+  }
 }
 
-Future<String> userLogin(name, password) async {
-  var dio = Dio();
-  Response res = await dio
-      .post(path['user']['login'], data: {"name": name, "password": password});
-  return res.data.toString();
+Future userLogin(name, password) async {
+  try {
+    var dio = Dio();
+    Response res = await dio.post(path['user']['login'],
+        data: {"name": name, "password": password});
+    return res.data;
+  } catch (error) {
+    return "";
+  }
 }

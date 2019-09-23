@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile/pages/register.dart';
 import 'package:mobile/pages/home.dart';
+import 'package:mobile/utils/client.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key key}) : super(key: key);
@@ -9,35 +10,133 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final _nameFieldController = TextEditingController();
+  var _nameError = "";
+
+  final _passwordFieldController = TextEditingController();
+  var _passwordError = "";
+  bool _doValidation() {
+    var name = this._nameFieldController.text;
+    if (name == "") {
+      setState(() {
+        this._nameError = "Name is required!";
+      });
+      return false;
+    } else {
+      setState(() {
+        this._nameError = "";
+      });
+    }
+
+    var password = this._passwordFieldController.text;
+    if (password == "") {
+      setState(() {
+        this._passwordError = "Password is required!";
+      });
+      return false;
+    } else {
+      setState(() {
+        this._passwordError = "";
+      });
+    }
+
+    return true;
+  }
+
+  void _doLogin(context) {
+    if (_doValidation()) {
+      var name = this._nameFieldController.text;
+      var password = this._passwordFieldController.text;
+      userLogin(name, password).then((data) {
+        if (data["success"]) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => HomePage()),
+          );
+        } else {
+          _ackAlert(context);
+        }
+      });
+    }
+  }
+
+  Future<void> _ackAlert(BuildContext context) {
+    return showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Fail'),
+          content: const Text('Login Failed!'),
+          actions: <Widget>[
+            FlatButton(
+              child: Text('Ok'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final nameField = TextField(
       decoration: InputDecoration(
-        contentPadding: EdgeInsets.all(20),
+        contentPadding: EdgeInsets.all(10),
         hintText: "Name",
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(32),
+        // labelText: "Name",
+        errorText: this._nameError == "" ? null : this._nameError,
+        prefixIcon: Icon(Icons.account_circle),
+        suffixIcon: IconButton(
+          icon: Icon(Icons.clear),
+          onPressed: _nameFieldController.clear,
         ),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(15),
+        ),
+      ),
+      controller: _nameFieldController,
+      maxLength: 40,
+      maxLines: 1,
+      autofocus: false,
+      textAlign: TextAlign.left,
+      style: TextStyle(
+        fontSize: 25,
+        color: Colors.blue,
       ),
     );
     final passwordField = TextField(
       obscureText: true,
       decoration: InputDecoration(
-        contentPadding: EdgeInsets.all(20),
+        contentPadding: EdgeInsets.all(10),
         hintText: "Password",
+        // labelText: "Password",
+        errorText: this._passwordError == "" ? null : this._passwordError,
+        prefixIcon: Icon(Icons.security),
+        suffixIcon: IconButton(
+          icon: Icon(Icons.clear),
+          onPressed: _passwordFieldController.clear,
+        ),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(32),
+          borderRadius: BorderRadius.circular(15),
         ),
       ),
+      controller: _passwordFieldController,
+      maxLength: 40,
+      maxLines: 1,
+      autofocus: false,
+      textAlign: TextAlign.left,
+      style: TextStyle(
+        fontSize: 25,
+        color: Colors.blue,
+      ),
     );
-
     final loginButton = RaisedButton(
       child: Text("Login"),
       onPressed: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => HomePage()),
-        );
+        _doLogin(context);
       },
     );
 

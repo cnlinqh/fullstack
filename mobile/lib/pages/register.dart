@@ -64,19 +64,23 @@ class _RegisterPageState extends State<RegisterPage> {
     if (_doValidation()) {
       var name = this._nameFieldController.text;
       var password = this._passwordFieldController.text;
-      userSignUp(name, password).then((value) {
-        _ackAlert(context);
+      userSignUp(name, password).then((data) {
+        if (data["success"]) {
+          _ackAlert(context, "Success", "Register user successfully!");
+        } else {
+          _ackAlert(context, "Failed", "Register user failed!");
+        }
       });
     }
   }
 
-  Future<void> _ackAlert(BuildContext context) {
+  Future<void> _ackAlert(BuildContext context, String title, String message) {
     return showDialog<void>(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Success'),
-          content: const Text('Register user successfully!'),
+          title: Text(title),
+          content: Text(message),
           actions: <Widget>[
             FlatButton(
               child: Text('Ok'),
