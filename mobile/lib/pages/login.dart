@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mobile/pages/register.dart';
 import 'package:mobile/pages/home.dart';
 import 'package:mobile/utils/client.dart';
+import 'package:mobile/utils/reqres.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key key}) : super(key: key);
@@ -49,11 +50,13 @@ class _LoginPageState extends State<LoginPage> {
       var password = this._passwordFieldController.text;
       userLogin(name, password).then((data) {
         if (data["success"]) {
+          setCurrentUser(data["name"], data["token"]);
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => HomePage()),
           );
         } else {
+          setCurrentUser("", "");
           data["message"] != ""
               ? _ackAlert(context, data["message"])
               : _ackAlert(context, "Login Failed!");

@@ -23,3 +23,14 @@ Future userLogin(name, password) async {
     return checkResponseError(error);
   }
 }
+
+Future userGetList() async {
+  try {
+    var dio = Dio();
+    dio.options.headers = prepareRequestHeaders();
+    Response res = await dio.get(path['user']['list']);
+    return res.data;
+  } catch (error) {
+    return checkResponseError(error);
+  }
+}

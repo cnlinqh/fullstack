@@ -1,8 +1,17 @@
-String name = "";
-String token = "";
+var currentUser = {"name": "", "token": ""};
 
-String prepareRequestHeaders() {
-  return "";
+void setCurrentUser(name, token) {
+  currentUser["name"] = name;
+  currentUser["token"] = token;
+}
+
+Object prepareRequestHeaders() {
+  if(currentUser["token"]!= ""){
+    return {
+      'Authorization': currentUser["token"]
+    };
+  }
+  return {};
 }
 
 Object checkResponseError(error) {
