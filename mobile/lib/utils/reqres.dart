@@ -1,12 +1,13 @@
 String name = "";
 String token = "";
 
-String prepareRequestHeaders(){
+String prepareRequestHeaders() {
   return "";
 }
 
-String checkResponseError(error){
-  return "";
-
+Object checkResponseError(error) {
+  if (error.toString().indexOf("Connection refused") != 0) {
+    return {"success": false, "message": "Error: Network Error!"};
+  }
+  return {"success": false, "message": "Error: Unknown Error!"};
 }
-

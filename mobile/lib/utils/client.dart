@@ -9,7 +9,7 @@ Future userSignUp(name, password) async {
         data: {"name": name, "password": password});
     return res.data;
   } catch (error) {
-    return "";
+    return checkResponseError(error);
   }
 }
 
@@ -20,6 +20,6 @@ Future userLogin(name, password) async {
         data: {"name": name, "password": password});
     return res.data;
   } catch (error) {
-    return "";
+    return checkResponseError(error);
   }
 }

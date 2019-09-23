@@ -54,19 +54,21 @@ class _LoginPageState extends State<LoginPage> {
             MaterialPageRoute(builder: (context) => HomePage()),
           );
         } else {
-          _ackAlert(context);
+          data["message"] != ""
+              ? _ackAlert(context, data["message"])
+              : _ackAlert(context, "Login Failed!");
         }
       });
     }
   }
 
-  Future<void> _ackAlert(BuildContext context) {
+  Future<void> _ackAlert(BuildContext context, String message) {
     return showDialog<void>(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
           title: Text('Fail'),
-          content: const Text('Login Failed!'),
+          content: Text(message),
           actions: <Widget>[
             FlatButton(
               child: Text('Ok'),
