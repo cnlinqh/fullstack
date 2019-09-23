@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 class DataPage extends StatefulWidget {
   DataPage({Key key}) : super(key: key);
 
@@ -8,8 +9,11 @@ class DataPage extends StatefulWidget {
 class _DataPageState extends State<DataPage> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-       child: Text('Data'),
+    return new Scaffold(
+      appBar: new AppBar(title: Text("Data")),
+      body: Center(
+        child: Text("Data"),
+      ),
     );
   }
 }
