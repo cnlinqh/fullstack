@@ -22,6 +22,12 @@ class _UserPageState extends State<UserPage> {
     });
   }
 
+  void _deleteUser(index) {
+    userDelete(_users[index]).then((data) {
+      if (data["success"]) {}
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -32,10 +38,25 @@ class _UserPageState extends State<UserPage> {
           Expanded(
             child: ListView.builder(
               itemCount: _users.length,
-              itemBuilder: (BuildContext context, int index) {
-                return ListTile(
-                  title: Text(
-                    "${_users[index]}",
+              itemBuilder: (context, index) {
+                final item = _users[index];
+                return Dismissible(
+                  onDismissed: (_) {
+                    this._deleteUser(index);
+                    _users.removeAt(index);
+                    Scaffold.of(context).showSnackBar(
+                        new SnackBar(content: new Text("$item dismissed")));
+                  },
+                  movementDuration: Duration(milliseconds: 100),
+                  direction: DismissDirection.horizontal,
+                  key: Key(item),
+                  child: ListTile(
+                    title: Text('$item'),
+                  ),
+                  background: Container(
+                    color: Colors.red,
+                    child: Text("Deleting"),
+                    alignment: Alignment.centerRight,
                   ),
                 );
               },

@@ -34,3 +34,14 @@ Future userGetList() async {
     return checkResponseError(error);
   }
 }
+
+Future userDelete(name) async {
+  try {
+    var dio = Dio();
+    dio.options.headers = prepareRequestHeaders();
+    Response res = await dio.delete(path['user']['delete'] + "?name=" + name);
+    return res.data;
+  } catch (error) {
+    return checkResponseError(error);
+  }
+}
