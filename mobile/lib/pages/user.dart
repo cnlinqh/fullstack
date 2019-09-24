@@ -35,7 +35,7 @@ class _UserPageState extends State<UserPage> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      appBar: new AppBar(title: Text("User List")),
+      // appBar: new AppBar(title: Text("User List")),
       body: Container(
         child: RefreshIndicator(
           onRefresh: _refreshUsers,
@@ -72,6 +72,10 @@ class _UserPageState extends State<UserPage> {
             ],
           ),
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: () {},
       ),
     );
   }

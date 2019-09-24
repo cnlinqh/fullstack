@@ -10,7 +10,7 @@ class _DataPageState extends State<DataPage> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      appBar: new AppBar(title: Text("Data")),
+      // appBar: new AppBar(title: Text("Data")),
       body: Center(
         child: Text("Data"),
       ),

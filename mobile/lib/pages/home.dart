@@ -13,6 +13,16 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("My App"),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.person_outline),
+            onPressed: () {},
+          )
+        ],
+      ),
+      drawer: MyDrawer(),
       // body: _pageList[_tabIndex],
       body: IndexedStack(
         index: _tabIndex,
@@ -22,11 +32,11 @@ class _HomePageState extends State<HomePage> {
         items: <BottomNavigationBarItem>[
           new BottomNavigationBarItem(
             title: new Text("user"),
-            icon: Icon(Icons.verified_user),
+            icon: Icon(Icons.supervisor_account),
           ),
           new BottomNavigationBarItem(
             title: new Text("Data"),
-            icon: Icon(Icons.details),
+            icon: Icon(Icons.subject),
           ),
         ],
         type: BottomNavigationBarType.fixed,
@@ -36,6 +46,34 @@ class _HomePageState extends State<HomePage> {
             _tabIndex = index;
           });
         },
+      ),
+    );
+  }
+}
+
+class MyDrawer extends StatelessWidget {
+  const MyDrawer({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Drawer(
+        child: MediaQuery.removePadding(
+          context: context,
+          removeTop: true,
+          child: Column(
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsetsDirectional.only(top: 38.0),
+                child: Row(
+                  children: <Widget>[
+                    Text("Welcome"),
+                  ],
+                ),
+              )
+            ],
+          ),
+        ),
       ),
     );
   }
