@@ -45,3 +45,15 @@ Future userDelete(name) async {
     return checkResponseError(error);
   }
 }
+
+Future dataGetPagedData(filter, skip, limit) async {
+  try {
+    var dio = Dio();
+    dio.options.headers = prepareRequestHeaders();
+    Response res = await dio.post(path['data']['paged'],
+        data: {"filter": filter, "skip": skip, "limit": limit});
+    return res.data;
+  } catch (error) {
+    return checkResponseError(error);
+  }
+}
