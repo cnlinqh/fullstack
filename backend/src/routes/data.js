@@ -12,6 +12,14 @@ router.get('/getData', passport.authenticate('bearer', { session: false }), (req
         return res.json({ success: true, messages: data });
     })
 });
+// router.get('/getPagedData', passport.authenticate('bearer', { session: false }), (req, res) => {
+router.post('/getPagedData', (req, res) => {
+    const { filter, skip, limit } = req.body;
+    Data.find({ message: new RegExp(filter, 'i') }, {}, { skip, limit }, (err, data) => {
+        if (err) return res.json({ success: false, error: err });
+        return res.json({ success: true, messages: data });
+    })
+});
 
 router.post('/putData', passport.authenticate('bearer', { session: false }), (req, res) => {
     const { id, message } = req.body;
