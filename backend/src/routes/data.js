@@ -64,7 +64,7 @@ router.post('/updateData', passport.authenticate('bearer', { session: false }), 
 
 router.post('/prepareData', (req, res) => {
     // router.post('/prepareData', passport.authenticate('bearer', { session: false }), (req, res) => {
-    const { count } = req.body;
+    const { count, random } = req.body;
     Data.deleteMany({}, (err) => {
         if (err) {
             return res.json({ success: false, message: "Failed to delete all data during preparation." })
@@ -77,7 +77,11 @@ router.post('/prepareData', (req, res) => {
     for (let i = 0; i < num; i++) {
         let data = new Data();
         data.id = i;
-        data.message = Math.random().toString(36).substring(2, 15);
+        if (random) {
+            data.message = Math.random().toString(36).substring(2, 15);
+        } else {
+            data.message = "" + i;
+        }
         data.save()
     }
     return res.json({ success: true, message: "count = " + num });
