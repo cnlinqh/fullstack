@@ -58,21 +58,35 @@ class MyDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: Drawer(
-        child: MediaQuery.removePadding(
-          context: context,
-          removeTop: true,
-          child: Column(
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsetsDirectional.only(top: 38.0),
-                child: Row(
-                  children: <Widget>[
-                    Text("Welcome"),
-                  ],
-                ),
-              )
-            ],
-          ),
+        child: ListView(
+          // Important: Remove any padding from the ListView.
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+              child: Text('Drawer Header'),
+              decoration: BoxDecoration(
+                color: Colors.blue,
+              ),
+            ),
+            ListTile(
+              title: Text('Item 1'),
+              onTap: () {
+                // Update the state of the app
+                // ...
+                // Then close the drawer
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Text('Item 2'),
+              onTap: () {
+                // Update the state of the app
+                // ...
+                // Then close the drawer
+                Navigator.pop(context);
+              },
+            ),
+          ],
         ),
       ),
     );
