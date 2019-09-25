@@ -15,7 +15,7 @@ router.get('/getData', passport.authenticate('bearer', { session: false }), (req
 // router.get('/getPagedData', passport.authenticate('bearer', { session: false }), (req, res) => {
 router.post('/getPagedData', (req, res) => {
     const { filter, skip, limit } = req.body;
-    Data.find({ message: new RegExp(filter, 'i') }, {}, { skip, limit }, (err, data) => {
+    Data.find({ message: new RegExp(filter, 'i') }, {}, { skip, limit, sort: { createdAt: -1 } }, (err, data) => {
         if (err) return res.json({ success: false, error: err });
         return res.json({ success: true, messages: data });
     })
@@ -39,7 +39,7 @@ router.post('/putData', passport.authenticate('bearer', { session: false }), (re
 });
 
 router.post('/putMessage', passport.authenticate('bearer', { session: false }), (req, res) => {
-// router.post('/putMessage', (req, res) => {
+    // router.post('/putMessage', (req, res) => {
     const { message } = req.body;
     if (!message) {
         return res.json({
@@ -101,16 +101,18 @@ router.post('/prepareData', passport.authenticate('bearer', { session: false }),
         num = count;
     }
     for (let i = 0; i < num; i++) {
-        let data = new Data();
-        data.id = i;
-        if (random) {
-            data.message = Math.random().toString(36).substring(2, 15);
-        } else {
-            data.message = "" + i;
-        }
-        data.save()
+        setTimeout(() => {
+            let data = new Data();
+            data.id = i;
+            if (random) {
+                data.message = Math.random().toString(36).substring(2, 15);
+            } else {
+                data.message = "" + i;
+            }
+            data.save()
+        }, 100*i);
     }
-    return res.json({ success: true, message: "count = " + num });
+    return res.json({ success: true, message: "server is preparing data, please check later!" });
 });
 
 export default router;
