@@ -3,6 +3,7 @@ const path = {
   "user": {
     "signup": serviceUrl + "user/signup",
     "login": serviceUrl + "user/accesstoken",
+    "info": serviceUrl + "user/user_info",
     "list": serviceUrl + "user/list",
     "delete": serviceUrl + "user/delete"
   },

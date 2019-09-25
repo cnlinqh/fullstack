@@ -11,6 +11,26 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  @override
+  void initState() {
+    super.initState();
+    checkSecureStorage().then((all) {
+      var name = all['name'];
+      var token = all['token'];
+      print("name  (SecureStore)= " + name);
+      print("token (SecureStore)= " + token);
+      validateSecureStorage(name, token).then((data) {
+        if (data["username"] == name) {
+          setCurrentUser(name, token);
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => HomePage()),
+          );
+        }
+      });
+    });
+  }
+
   final _nameFieldController = TextEditingController();
   var _nameError = "";
 
