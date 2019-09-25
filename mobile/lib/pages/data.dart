@@ -86,7 +86,6 @@ class _DataPageState extends State<DataPage> {
       return;
     }
     dataGetPagedData(_filter, _skip, _limit).then((data) {
-      print("======skip: " + _skip.toString());
       if (data["success"]) {
         List messageList = data["messages"] as List;
         if (messageList.length == 0) {

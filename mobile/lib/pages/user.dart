@@ -24,7 +24,6 @@ class _UserPageState extends State<UserPage> {
     return userGetList().then((data) {
       if (data["success"]) {
         List userList = data["userList"] as List;
-        print(userList);
         setState(() {
           _users = userList.map((user) => user["name"]).toList();
         });
