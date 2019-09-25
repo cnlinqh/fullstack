@@ -38,6 +38,32 @@ router.post('/putData', passport.authenticate('bearer', { session: false }), (re
     })
 });
 
+router.post('/putMessage', passport.authenticate('bearer', { session: false }), (req, res) => {
+// router.post('/putMessage', (req, res) => {
+    const { message } = req.body;
+    if (!message) {
+        return res.json({
+            success: false,
+            error: 'Invalid Inputs'
+        });
+    }
+    var findQuery = Data.find().sort({ id: -1 }).limit(1);
+    findQuery.exec(function (err, maxResult) {
+        if (err) return res.json({ success: false, error: err });
+        var id = 0;
+        if (maxResult.length !== 0) {
+            id = maxResult[0].id + 1;
+        }
+        let data2 = new Data();
+        data2.id = id;
+        data2.message = message;
+        data2.save((err, node) => {
+            if (err) return res.json({ success: false, error: err });
+            return res.json({ success: true, node });
+        })
+    });
+});
+
 router.delete('/deleteData', passport.authenticate('bearer', { session: false }), (req, res) => {
     const { _id } = req.body;
     Data.findByIdAndRemove(_id, (err) => {
@@ -62,8 +88,8 @@ router.post('/updateData', passport.authenticate('bearer', { session: false }), 
     Data.deleteMany
 });
 
-router.post('/prepareData', (req, res) => {
-    // router.post('/prepareData', passport.authenticate('bearer', { session: false }), (req, res) => {
+// router.post('/prepareData', (req, res) => {
+router.post('/prepareData', passport.authenticate('bearer', { session: false }), (req, res) => {
     const { count, random } = req.body;
     Data.deleteMany({}, (err) => {
         if (err) {
