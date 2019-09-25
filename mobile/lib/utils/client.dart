@@ -57,3 +57,38 @@ Future dataGetPagedData(filter, skip, limit) async {
     return checkResponseError(error);
   }
 }
+
+Future dataAdd(message) async {
+  try {
+    var dio = Dio();
+    dio.options.headers = prepareRequestHeaders();
+    Response res =
+        await dio.post(path['data']['add'], data: {"message": message});
+    return res.data;
+  } catch (error) {
+    return checkResponseError(error);
+  }
+}
+
+Future dataDeleteAll() async {
+  try {
+    var dio = Dio();
+    dio.options.headers = prepareRequestHeaders();
+    Response res = await dio.delete(path['data']['deleteAll']);
+    return res.data;
+  } catch (error) {
+    return checkResponseError(error);
+  }
+}
+
+Future dataPrepare(count, random) async {
+  try {
+    var dio = Dio();
+    dio.options.headers = prepareRequestHeaders();
+    Response res = await dio.post(path['data']['prepare'],
+        data: {"count": count, "random": random});
+    return res.data;
+  } catch (error) {
+    return checkResponseError(error);
+  }
+}

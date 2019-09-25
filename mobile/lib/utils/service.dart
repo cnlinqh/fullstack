@@ -7,6 +7,9 @@ const path = {
     "delete": serviceUrl + "user/delete"
   },
   "data": {
-    "paged": serviceUrl + "api/getPagedData"
+    "paged": serviceUrl + "api/getPagedData",
+    "add": serviceUrl + "api/putMessage",
+    "deleteAll": serviceUrl + "api/deleteAll",
+    "prepare": serviceUrl + "api/prepareData"
   }
 };
