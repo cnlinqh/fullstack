@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:mobile/pages/douban/douban.dart';
 import 'package:mobile/pages/register.dart';
 import 'package:mobile/pages/home.dart';
 import 'package:mobile/utils/client.dart';
 import 'package:mobile/utils/reqres.dart';
+
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key key}) : super(key: key);
@@ -176,6 +178,16 @@ class _LoginPageState extends State<LoginPage> {
         );
       },
     );
+    final doubanButton = FlatButton(
+      child: Text("Douban"),
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => DoubanPage()),
+        );
+      },
+    );
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Login"),
@@ -187,6 +199,7 @@ class _LoginPageState extends State<LoginPage> {
             passwordField,
             loginButton,
             registerButton,
+            doubanButton,
           ],
         ),
       ),

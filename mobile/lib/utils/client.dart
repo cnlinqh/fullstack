@@ -92,3 +92,41 @@ Future dataPrepare(count, random) async {
     return checkResponseError(error);
   }
 }
+
+// ==========================
+// Douban
+
+Future doubanGetMoviesTags({
+  pageStart = 0,
+  pageLimit = 100,
+}) async {
+  try {
+    var dio = Dio();
+    var url = path['douban']['movie_tags'];
+    print(url);
+    Response res = await dio.get(url);
+    print(res.data);
+    return res.data;
+  } catch (error) {
+    return checkResponseError(error);
+  }
+}
+
+Future doubanGetMovieSubjects({
+  tag,
+  pageStart = 0,
+  pageLimit = 100,
+}) async {
+  try {
+    var dio = Dio();
+    var url = path['douban']['movie_subjects'];
+    url = url.replaceAll(new RegExp('<tag>'), tag.toString());
+    url = url.replaceAll(new RegExp('<start>'), pageStart.toString());
+    url = url.replaceAll(new RegExp('<limit>'), pageLimit.toString());
+    print(url);
+    Response res = await dio.get(url);
+    return res.data;
+  } catch (error) {
+    return checkResponseError(error);
+  }
+}
