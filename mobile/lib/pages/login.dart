@@ -17,17 +17,19 @@ class _LoginPageState extends State<LoginPage> {
     checkSecureStorage().then((all) {
       var name = all['name'];
       var token = all['token'];
-      print("name  (SecureStore)= " + name);
-      print("token (SecureStore)= " + token);
-      validateSecureStorage(name, token).then((data) {
-        if (data["username"] == name) {
-          setCurrentUser(name, token);
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => HomePage()),
-          );
-        }
-      });
+      print("name  (SecureStore)= " + name.toString());
+      print("token (SecureStore)= " + token.toString());
+      if (name != "" && token != "") {
+        validateSecureStorage(name, token).then((data) {
+          if (data["username"] == name) {
+            setCurrentUser(name, token);
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => HomePage()),
+            );
+          }
+        });
+      }
     });
   }
 
