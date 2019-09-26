@@ -1,4 +1,5 @@
-const serviceUrl = 'http://localhost:3001/';
+const serviceUrl = 'http://10.0.2.2:3001/';     // Android simulator
+// const serviceUrl = 'http://localhost:3001/'; // iOS simulator
 const path = {
   "user": {
     "signup": serviceUrl + "user/signup",
