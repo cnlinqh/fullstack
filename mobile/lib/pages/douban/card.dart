@@ -20,7 +20,7 @@ class Card extends StatelessWidget {
                   width: ScreenUtil.getInstance().setWidth(260),
                   child: Image.network(subject['cover']),
                 ),
-                Star(double.parse(subject['rate'])),
+                Star(double.parse(subject['rate']), "Vertical"),
               ],
             ),
             Text(

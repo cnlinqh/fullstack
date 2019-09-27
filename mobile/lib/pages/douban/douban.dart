@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile/utils/client.dart';
-import 'package:mobile/pages/douban/taglist.dart';
+import 'package:mobile/pages/douban/tag_list.dart';
 
 class DoubanPage extends StatefulWidget {
   DoubanPage({Key key}) : super(key: key);

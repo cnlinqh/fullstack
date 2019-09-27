@@ -103,6 +103,7 @@ Future doubanGetMoviesTags({
   try {
     var dio = Dio();
     var url = path['douban']['movie_tags'];
+    print(url);
     Response res = await dio.get(url);
     return res.data;
   } catch (error) {
@@ -121,6 +122,20 @@ Future doubanGetMovieSubjects({
     url = url.replaceAll(new RegExp('<tag>'), tag.toString());
     url = url.replaceAll(new RegExp('<start>'), pageStart.toString());
     url = url.replaceAll(new RegExp('<limit>'), pageLimit.toString());
+    print(url);
+    Response res = await dio.get(url);
+    return res.data;
+  } catch (error) {
+    return checkResponseError(error);
+  }
+}
+
+Future doubanGetMovieSubjectDetails(id) async {
+  try {
+    var dio = Dio();
+    var url = path['douban']['movie_subject'];
+    url = url.replaceAll(new RegExp('<id>'), id.toString());
+    print(url);
     Response res = await dio.get(url);
     return res.data;
   } catch (error) {

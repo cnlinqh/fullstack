@@ -19,5 +19,7 @@ const path = {
         "https://movie.douban.com/j/search_tags?type=movie&source=index",
     "movie_subjects":
         "https://movie.douban.com/j/search_subjects?type=movie&tag=<tag>&page_limit=<limit>&page_start=<start>",
+    "movie_subject":
+        "https://movie.douban.com/j/subject_abstract?subject_id=<id>",
   }
 };

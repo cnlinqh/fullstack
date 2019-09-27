@@ -1,5 +1,6 @@
 import 'package:mobile/pages/douban/card.dart' as local;
 import 'package:flutter/material.dart';
+import 'package:mobile/pages/douban/tag_details.dart';
 import 'package:mobile/utils/client.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -38,7 +39,13 @@ class _TagState extends State<Tag> {
                 child: Text(""),
               ),
               FlatButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => TagDetails(_tag),
+                      ));
+                },
                 child: Text("全部>"),
               ),
             ],
