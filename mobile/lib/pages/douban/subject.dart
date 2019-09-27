@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mobile/pages/douban/star.dart';
 import 'package:mobile/utils/client.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Subject extends StatefulWidget {
   final _subject;
@@ -36,7 +37,12 @@ class _SubjectState extends State<Subject> {
           children: <Widget>[
             Container(
               width: ScreenUtil.getInstance().setWidth(400),
-              child: Image.network(_subject['cover']),
+              child: InkWell(
+                child: Image.network(_subject['cover']),
+                onTap: () {
+                  _launchURL(_subject['url']);
+                },
+              ),
             ),
             Container(
               width: ScreenUtil.getInstance().setWidth(800),
@@ -55,6 +61,14 @@ class _SubjectState extends State<Subject> {
         ),
       ),
     );
+  }
+
+  _launchURL(url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 
   String _buildTitle() {
