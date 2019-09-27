@@ -103,7 +103,6 @@ Future doubanGetMoviesTags({
   try {
     var dio = Dio();
     var url = path['douban']['movie_tags'];
-    print(url);
     Response res = await dio.get(url);
     print(res.data);
     return res.data;

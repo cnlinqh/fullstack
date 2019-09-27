@@ -4,7 +4,7 @@ import 'package:mobile/pages/register.dart';
 import 'package:mobile/pages/home.dart';
 import 'package:mobile/utils/client.dart';
 import 'package:mobile/utils/reqres.dart';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key key}) : super(key: key);
@@ -111,6 +111,8 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.instance = ScreenUtil(width: 1440, height: 2792)..init(context);
+  
     final nameField = TextField(
       decoration: InputDecoration(
         contentPadding: EdgeInsets.all(10),

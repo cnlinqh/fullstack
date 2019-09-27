@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mobile/utils/client.dart';
 
 class DoubanPage extends StatefulWidget {
   DoubanPage({Key key}) : super(key: key);
-
   _DoubanPageState createState() => _DoubanPageState();
 }
 
@@ -37,19 +37,8 @@ class _DoubanPageState extends State<DoubanPage> {
               child: Text("ERROR"),
             );
           } else if (async.hasData) {
-            print(async.data);
             List list = async.data['tags'];
-            print(list);
-            // return Center(
-            //   child: new RefreshIndicator(
-            //     // child: buildListView(context, list),
-            //     onRefresh: (){},
-            //   ),
-            // );
-            return SingleChildScrollView(
-              // child: buildListView(context, list),
-              child: Image.network('https://img3.doubanio.com\/view\/photo\/s_ratio_poster\/public\/p2563546656.webp')
-            );
+            return TagList(list);
           }
         }
         return Center(
@@ -59,13 +48,29 @@ class _DoubanPageState extends State<DoubanPage> {
       future: future,
     );
   }
+}
 
-  buildListView(BuildContext context, List list) {
-    return ListView.builder(
-      itemCount: list.length,
-      itemBuilder: (context, index) {
-        return new Tag(list[index]);
-      },
+class TagList extends StatefulWidget {
+  final List _tags;
+  TagList(this._tags);
+  _TagListState createState() => _TagListState(_tags);
+}
+
+class _TagListState extends State<TagList> {
+  final List _tags;
+  _TagListState(this._tags);
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: ScreenUtil.getInstance().setWidth(1440),
+      child: new ListView.builder(
+        itemCount: _tags.length,
+        itemBuilder: (context, index) {
+          return new ListTile(
+            title: new Tag(_tags[index]),
+          );
+        },
+      ),
     );
   }
 }
@@ -73,7 +78,6 @@ class _DoubanPageState extends State<DoubanPage> {
 class Tag extends StatefulWidget {
   final String _tag;
   Tag(this._tag);
-
   _TagState createState() => _TagState(this._tag);
 }
 
@@ -88,7 +92,6 @@ class _TagState extends State<Tag> {
     doubanGetMovieSubjects(tag: this._tag, pageLimit: 6).then((data) {
       setState(() {
         this._subjects = data['subjects'];
-        print(this._subjects);
       });
     });
   }
@@ -96,27 +99,18 @@ class _TagState extends State<Tag> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Column(
-        children: <Widget>[
-          Row(
-            children: <Widget>[Text(_tag)],
-          ),
-          Center(
-            child: Image.network(this._subjects[0]['cover'])
-            // child: GridView.builder(
-            //   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            //     crossAxisCount: 3,
-            //     childAspectRatio: 1.0,
-            //   ),
-            //   itemCount: 6,
-            //   itemBuilder: (context, index) {
-            //     // return Card(_subjects[index]);
-            //     //return Image.network(_subjects[index]['cover'].toString());
-            //     return Text(this._subjects[index]);
-            //   },
-            ),
-          
-        ],
+      width: ScreenUtil.getInstance().setWidth(1440),
+      child: GridView.builder(
+        shrinkWrap: true,
+        physics: NeverScrollableScrollPhysics(),
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 3,
+          childAspectRatio: 1.0,
+        ),
+        itemCount: this._subjects.length,
+        itemBuilder: (context, index) {
+          return Card(this._subjects[index]);
+        },
       ),
     );
   }
@@ -129,7 +123,8 @@ class Card extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Image.network(subject.cover),
+      width: ScreenUtil.getInstance().setWidth(1440/3),
+      child: Image.network(subject['cover']),
     );
   }
 }
