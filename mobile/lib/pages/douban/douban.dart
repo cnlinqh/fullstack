@@ -100,12 +100,19 @@ class _TagState extends State<Tag> {
   Widget build(BuildContext context) {
     return Container(
       width: ScreenUtil.getInstance().setWidth(1440),
-      height: ScreenUtil.getInstance().setHeight(1000),
+      height: ScreenUtil.getInstance().setHeight(1060),
       child: Column(
         children: <Widget>[
           Row(
             children: <Widget>[
-              Text(_tag)
+              Text(_tag),
+              Expanded(
+                child: Text(""),
+              ),
+              FlatButton(
+                onPressed: () {},
+                child: Text("全部>"),
+              ),
             ],
           ),
           GridView.builder(
@@ -134,18 +141,93 @@ class Card extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: SingleChildScrollView(
-         child: Column(
-           children: <Widget>[
-             Container(
-               width: ScreenUtil.getInstance().setWidth(200),
-               child: Image.network(subject['cover']),
-             ),
-             Text(subject['rate']),
-             Text(subject['title']),
-           ],
-         ),
+        child: Column(
+          children: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Container(
+                  width: ScreenUtil.getInstance().setWidth(260),
+                  child: Image.network(subject['cover']),
+                ),
+                Star(double.parse(subject['rate'])),
+              ],
+            ),
+            Text(
+              subject['title'] + "/" + subject['rate'],
+              style: TextStyle(
+                fontSize: 12,
+              ),
+            ),
+          ],
+        ),
       ),
-     
+    );
+  }
+}
+
+class Star extends StatelessWidget {
+  final double _size = 14;
+  final double _rate;
+  Star(this._rate);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Container(
+        width: ScreenUtil.getInstance().setWidth(70),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            Icon(
+              _rate >= 2
+                  ? Icons.star
+                  : _rate > 0 ? Icons.star_half : Icons.star_border,
+              size: _size,
+              color: _rate >= 2
+                  ? Colors.orange
+                  : _rate > 0 ? Colors.orangeAccent : Colors.black,
+            ),
+            Icon(
+              _rate >= 4
+                  ? Icons.star
+                  : _rate > 2 ? Icons.star_half : Icons.star_border,
+              size: _size,
+              color: _rate >= 4
+                  ? Colors.orange
+                  : _rate > 2 ? Colors.orangeAccent : Colors.black,
+            ),
+            Icon(
+              _rate >= 6
+                  ? Icons.star
+                  : _rate > 4 ? Icons.star_half : Icons.star_border,
+              size: _size,
+              color: _rate >= 6
+                  ? Colors.orange
+                  : _rate > 4 ? Colors.orangeAccent : Colors.black,
+            ),
+            Icon(
+              _rate >= 8
+                  ? Icons.star
+                  : _rate > 6 ? Icons.star_half : Icons.star_border,
+              size: _size,
+              color: _rate >= 8
+                  ? Colors.orange
+                  : _rate > 6 ? Colors.orangeAccent : Colors.black,
+            ),
+            Icon(
+              _rate >= 10
+                  ? Icons.star
+                  : _rate > 8 ? Icons.star_half : Icons.star_border,
+              size: _size,
+              color: _rate >= 10
+                  ? Colors.orange
+                  : _rate > 8 ? Colors.orangeAccent : Colors.black,
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
