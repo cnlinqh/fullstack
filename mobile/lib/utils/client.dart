@@ -104,7 +104,6 @@ Future doubanGetMoviesTags({
     var dio = Dio();
     var url = path['douban']['movie_tags'];
     Response res = await dio.get(url);
-    print(res.data);
     return res.data;
   } catch (error) {
     return checkResponseError(error);
@@ -122,7 +121,6 @@ Future doubanGetMovieSubjects({
     url = url.replaceAll(new RegExp('<tag>'), tag.toString());
     url = url.replaceAll(new RegExp('<start>'), pageStart.toString());
     url = url.replaceAll(new RegExp('<limit>'), pageLimit.toString());
-    print(url);
     Response res = await dio.get(url);
     return res.data;
   } catch (error) {

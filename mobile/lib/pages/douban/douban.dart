@@ -100,17 +100,27 @@ class _TagState extends State<Tag> {
   Widget build(BuildContext context) {
     return Container(
       width: ScreenUtil.getInstance().setWidth(1440),
-      child: GridView.builder(
-        shrinkWrap: true,
-        physics: NeverScrollableScrollPhysics(),
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 3,
-          childAspectRatio: 1.0,
-        ),
-        itemCount: this._subjects.length,
-        itemBuilder: (context, index) {
-          return Card(this._subjects[index]);
-        },
+      height: ScreenUtil.getInstance().setHeight(1000),
+      child: Column(
+        children: <Widget>[
+          Row(
+            children: <Widget>[
+              Text(_tag)
+            ],
+          ),
+          GridView.builder(
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 3,
+              // childAspectRatio: 1.0,
+            ),
+            itemCount: this._subjects.length,
+            itemBuilder: (context, index) {
+              return Card(this._subjects[index]);
+            },
+          ),
+        ],
       ),
     );
   }
@@ -123,8 +133,19 @@ class Card extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: ScreenUtil.getInstance().setWidth(1440/3),
-      child: Image.network(subject['cover']),
+      child: SingleChildScrollView(
+         child: Column(
+           children: <Widget>[
+             Container(
+               width: ScreenUtil.getInstance().setWidth(200),
+               child: Image.network(subject['cover']),
+             ),
+             Text(subject['rate']),
+             Text(subject['title']),
+           ],
+         ),
+      ),
+     
     );
   }
 }
